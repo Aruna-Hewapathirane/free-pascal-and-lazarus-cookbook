@@ -521,7 +521,7 @@ end.
 ```
 
 
-## Assigns student IDs to student names in a text file
+## Assigns student IDs to student names
 
 This program assigns an ID to each student name from a text file and sorts them by student ID.
 
