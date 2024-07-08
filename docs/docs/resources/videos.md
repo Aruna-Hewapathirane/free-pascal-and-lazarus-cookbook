@@ -5,6 +5,7 @@
     Info and links on this page compiled from Free Pascal & Lazarus sites (official sites, wikis, Discord), Udemy, and Youtube.
 
 
+
 ## Udemy
 
 - [Learn Pascal Programming from Scratch](https://www.udemy.com/course/learn-pascal-programming-from-scratch/?) by Stone River eLearning. Last updated 02/2017.
@@ -41,7 +42,28 @@ Published 2015. Last updated 2021.
 - [5.2 Dynamic arrays](https://commons.swinburne.edu.au/items/07f4ab4a-3d6e-47f4-9da6-be115e3bafad/1/)
 - [6.1 Abstraction](https://commons.swinburne.edu.au/items/7ead1f5f-76c0-46d3-b136-5b554572b390/1/)
 
+## Tim Coates
 
+WordPress: [https://timcoatesinsights.wordpress.com](https://timcoatesinsights.wordpress.com)
+
+### [The Silver Coder](https://www.youtube.com/@silvercoder70)
+
+Last updated 2024.
+
+This Youtube channel has tips for Delphi and Lazarus IDE.
+
+- [The "Joys" of User Interfaces? - Decisions That Make or Break Your App](https://www.youtube.com/watch?v=_Ftg1JF4lkU)
+- [Journey to the dark side: experimenting with Lazarus and Indy (Ep 2)](https://www.youtube.com/watch?v=3pOhrm6PJbA)	
+- [Coding Session with The Silver Coder](https://www.youtube.com/watch?v=K1iJIYtBPaw)
+- [Delphi App Internationalization: Formatting Dates, Currencies & More](https://www.youtube.com/watch?v=WxDsLJ6bTJE)	
+- [Coding Challenge: LeetCode Question in (Object) Pascal](https://www.youtube.com/watch?v=WfzZwI5BPsE)	
+- [My first look at Lazarus and Free Pascal](https://www.youtube.com/watch?v=jsLHkWExHsI)
+- [Don't freak out! It's just a bug: Debugging with Delphi](https://www.youtube.com/watch?v=-17SYqAkxxg)	
+- [Building a Shopping List FMX  - Version 0.11](https://www.youtube.com/watch?v=6KljYHLoEPU)	
+- [Building a Shopping List FMX  - Version 0.1](https://www.youtube.com/watch?v=OfHSc9mvgxI)	
+- [Building a Shopping List - Ideas](https://www.youtube.com/watch?v=Ps5Uwti5Ars)
+- [Cool features of Object Pascal and Delphi](https://www.youtube.com/watch?v=e_7C_VNAmNg)	
+- [Starting an Adventure with Delphi](https://www.youtube.com/watch?v=pEkPlUvsnqk)
 
 ## Hello World Computing
 
@@ -55,8 +77,6 @@ Last updated on 30 May 2014.
 - [Part 4 - Variables and their roles](http://www.youtube.com/watch?v=mE8f60w2d48)
 - [Part 5 - Simple Mathematics](http://www.youtube.com/watch?v=rRsE7U2eaOA)
 - [Part 6 - Simple Calculator](http://www.youtube.com/watch?v=fhE-ctZEaa8)
-
-
 
 ## SchoolFreeware
 
@@ -97,7 +117,6 @@ Last updated on 2 Jul 2014.
 - [31 - Making And Writing To Text Files](http://www.youtube.com/watch?v=iXix_hJMNpc)
 - [32 - Reading Text Files](http://www.youtube.com/watch?v=FdSNlRdNtbs)
 
-
 ### [Free Pascal App Tutorial](https://www.youtube.com/playlist?list=PL0BE41D3CA142028F)
 
 - [App Tutorial 1 - Getting Started And Free Download Link](http://www.youtube.com/watch?v=7PuvsyLapgw)
@@ -115,7 +134,6 @@ Last updated on 2 Jul 2014.
 - [App Tutorial 13 - Bouncing Balls Animation - Parallel Arrays](http://www.youtube.com/watch?v=MahHxXEkFF0)
 - [App Tutorial 14 - OnPaint Drawing](https://www.youtube.com/watch?v=UP7d9HyTGlE)
 
-
 ## Prepared Mindfulness
 
 ### [Lazarus - RAD Pascal](https://www.youtube.com/playlist?list=PLA3FA995EE8A094F6)
@@ -128,6 +146,9 @@ Last updated on 3 Jun 2014.
 
 
 ## Marcus Fernström
+
+Github: [https://github.com/MFernstrom](https://github.com/MFernstrom)
+Medium: [https://medium.com/@marcusfernstrm](https://medium.com/@marcusfernstrm)
 
 ### [Tech & Swords](https://www.youtube.com/@TechSwords)
 
