@@ -873,11 +873,11 @@ begin
 end.
 ```
 
-## Arrays for Random Access
+## Arrays
 
 ...
 
-## Files and Text Processing
+## Processing Text File
 
 ...
 
