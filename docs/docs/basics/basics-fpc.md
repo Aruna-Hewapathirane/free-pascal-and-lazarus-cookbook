@@ -600,69 +600,7 @@ begin
 end.
 ```
 
-## Strings Operations
-
-...
-
-## Enum Types
-
-In Free Pascal, enumerated ordinal types are user-defined types that consist of a set of named values. These values are called enumeration constants, and each constant has an associated integer value, starting from 0 by default. 
-
-Enumerated types provide a way to define a variable that can only take one of a specified set of values, making the code more readable and type-safe.
-
-**Syntax**
-
-```pascal linenums="1"
-type
-  TEnumName = (Value1, Value2, Value3, ...);
-```
-
-**Example**
-
-```pascal linenums="1"
-  {$mode objfpc}{$H+}{$J-}
-
-type
-  TDay = (Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday);
-
-var
-  today: TDay;
-begin
-  // Assign today var to TDay.Wednesday 
-  today := Wednesday;
-  
-  WriteLn('Integer(today)      gives ', Integer(today));     // Prints 3
-  WriteLn('Integer(Wednesday)) gives ', Integer(Wednesday)); // Prints 3
-  WriteLn('TDay(0)             gives ', TDay(0));            // Prints Sunday
-
-  if today = Wednesday then
-  begin
-    WriteLn('Today is Wednesday');
-  end;
-end.
-```
-
-**Example of an Enum in case statement**
-
-```pascal linenums="1"
-  {$mode objfpc}{$H+}{$J-}
-
-type
-  TColor = (Red, Green, Blue);
-
-var
-  color: TColor;
-begin
-  color := Green;
-  case color of
-    Red: WriteLn('Red');
-    Green: WriteLn('Green');
-    Blue: WriteLn('Blue');
-  end;
-end.
-```
-
-## String processing
+## String Operations
 
 ### Length of a String
 
@@ -843,7 +781,7 @@ type
 type
   TPerson = record
     name: string;
-    age: Integer;
+    age: integer;
     height: Real;
   end;
 
@@ -875,7 +813,185 @@ end.
 
 ## Arrays
 
-...
+### Static Arrays
+
+Static arrays have a fixed size defined at compile time.
+
+**Syntax**
+
+```pascal linenums="1"
+var
+  arrayName: array[startIndex..endIndex] of elementType;
+```
+
+**Example**
+
+
+```pascal linenums="1"
+program StaticArrayExample;
+
+var
+  numbers: array[1..5] of integer;
+  i: integer;
+
+begin
+  // Initialising the array
+  numbers[1] := 10;
+  numbers[2] := 20;
+  numbers[3] := 30;
+  numbers[4] := 40;
+  numbers[5] := 50;
+
+  // Accessing and printing array elements
+  for i := 1 to 5 do
+    WriteLn('numbers[', i, '] = ', numbers[i]);
+end.
+
+```
+
+### Dynamic Arrays
+
+Dynamic arrays can be resized at runtime using the `SetLength` procedure.
+
+**Syntax**
+
+```pascal linenums="1"
+var
+  arrayName: array of elementType;
+```
+
+
+**Example**
+
+```pascal linenums="1"
+program DynamicArrayExample;
+
+var
+  numbers: array of integer;
+  i: integer;
+
+begin
+  // Setting the length of the array
+  SetLength(numbers, 5);
+
+  // Initialising the array
+  for i := 0 to High(numbers) do
+    numbers[i] := (i + 1) * 10;
+
+  // Accessing and printing array elements
+  for i := 0 to High(numbers) do
+    WriteLn('numbers[', i, '] = ', numbers[i]);
+
+  // Resizing the array
+  SetLength(numbers, 10);
+  for i := 5 to 9 do
+    numbers[i] := (i + 1) * 10;
+
+  // Accessing and printing array elements after resizing
+  for i := 0 to High(numbers) do
+    WriteLn('numbers[', i, '] = ', numbers[i]);
+end.
+
+```
+
+### Open Arrays
+
+Open arrays are typically used in procedures or functions to accept arrays of varying sizes.
+
+**Syntax**
+
+```pascal linenums="1"
+procedure ProcedureName(arrayName: array of elementType);
+```
+
+
+**Example**
+
+```pascal linenums="1"
+program OpenArrayExample;
+
+procedure PrintArray(arr: array of integer);
+var
+  i: integer;
+begin
+  for i := Low(arr) to High(arr) do
+    WriteLn('arr[', i, '] = ', arr[i]);
+end;
+
+var
+  numbers: array[1..5] of integer;
+begin
+  // Initialising the array
+  numbers[1] := 10;
+  numbers[2] := 20;
+  numbers[3] := 30;
+  numbers[4] := 40;
+  numbers[5] := 50;
+
+  // Passing the array to the procedure
+  PrintArray(numbers);
+end.
+```
+
+
+## Enum Types
+
+In Free Pascal, enumerated ordinal types are user-defined types that consist of a set of named values. These values are called enumeration constants, and each constant has an associated integer value, starting from 0 by default. 
+
+Enumerated types provide a way to define a variable that can only take one of a specified set of values, making the code more readable and type-safe.
+
+**Syntax**
+
+```pascal linenums="1"
+type
+  TEnumName = (Value1, Value2, Value3, ...);
+```
+
+**Example**
+
+```pascal linenums="1"
+  {$mode objfpc}{$H+}{$J-}
+
+type
+  TDay = (Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday);
+
+var
+  today: TDay;
+begin
+  // Assign today var to TDay.Wednesday 
+  today := Wednesday;
+  
+  WriteLn('Integer(today)      gives ', Integer(today));     // Prints 3
+  WriteLn('Integer(Wednesday)) gives ', Integer(Wednesday)); // Prints 3
+  WriteLn('TDay(0)             gives ', TDay(0));            // Prints Sunday
+
+  if today = Wednesday then
+  begin
+    WriteLn('Today is Wednesday');
+  end;
+end.
+```
+
+**Example of an Enum in case statement**
+
+```pascal linenums="1"
+  {$mode objfpc}{$H+}{$J-}
+
+type
+  TColor = (Red, Green, Blue);
+
+var
+  color: TColor;
+begin
+  color := Green;
+  case color of
+    Red: WriteLn('Red');
+    Green: WriteLn('Green');
+    Blue: WriteLn('Blue');
+  end;
+end.
+```
+
 
 ## Processing Text File
 
