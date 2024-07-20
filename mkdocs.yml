@@ -5,27 +5,29 @@ nav:
     - Overview: index.md
     - About: about.md
     - License: LICENSE.md
-  - Core Tasks:
+  - Basics:
     - Overview: docs/basics/overview.md
-    - Install FPC and Lazarus: docs/basics/install.md
-    - Lazarus IDE: docs/basics/lazarus-ide.md
-    - Code Structure: docs/basics/code-structure.md
-    - Run a "Hello World!": docs/basics/hello-world.md
-    - Command Line Parameters: docs/basics/cmd-line-params.md
-    - Functions & Procedures: docs/basics/funcs-procs.md
-    - Immutability: docs/basics/immutability.md
-    - Loops: docs/basics/loops.md
-    - Arrays: docs/basics/arrays.md
-    - Lists: docs/basics/lists.md 
-    - Strings: docs/basics/strings.md
-    - Numbers: docs/basics/numbers.md
-    - Dates & Times: docs/basics/dates.md
-    - Regular Expressions: docs/basics/regex.md
-    - Directories, Paths and Files: docs/basics/dir-path-filename.md
-    - Exceptions: docs/basics/exception-try-blocks.md
-    - File Handling I: docs/basics/file-handling.md
-    - File Handling II: docs/basics/file-handling-ii.md
-
+    - Basics of Free Pascal: docs/basics/basics-fpc.md
+  - Core Tasks:
+    - Overview: docs/core-tasks/overview.md
+    - Install FPC and Lazarus: docs/core-tasks/install.md
+    - Lazarus IDE: docs/core-tasks/lazarus-ide.md
+    - Code Structure: docs/core-tasks/code-structure.md
+    - Run a "Hello World!": docs/core-tasks/hello-world.md
+    - Command Line Parameters: docs/core-tasks/cmd-line-params.md
+    - Functions & Procedures: docs/core-tasks/funcs-procs.md
+    - Immutability: docs/core-tasks/immutability.md
+    - Loops: docs/core-tasks/loops.md
+    - Arrays: docs/core-tasks/arrays.md
+    - Lists: docs/core-tasks/lists.md 
+    - Strings: docs/core-tasks/strings.md
+    - Numbers: docs/core-tasks/numbers.md
+    - Dates & Times: docs/core-tasks/dates.md
+    - Regular Expressions: docs/core-tasks/regex.md
+    - Directories, Paths and Files: docs/core-tasks/dir-path-filename.md
+    - Exceptions: docs/core-tasks/exception-try-blocks.md
+    - File Handling I: docs/core-tasks/file-handling.md
+    - File Handling II: docs/core-tasks/file-handling-ii.md
   - Advanced Topics:
     - Overview: docs/advanced/overview.md
     - Conditional Compilation: docs/advanced/conditional-compilation.md
@@ -128,6 +130,11 @@ markdown_extensions:
       permalink: true
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 extra_javascript:
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6

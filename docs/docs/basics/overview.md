@@ -1,5 +1,3 @@
-# Core Tasks
+# Overview
 
-This section has recipes for doing core tasks using Free Pascal and Lazarus.
-
-Choose a topic from the left sidebar.
+This section contains the basics of Free Pascal; fundamental tasks to perform other core tasks in programming.
