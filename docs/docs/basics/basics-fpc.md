@@ -325,8 +325,11 @@ end;
 **Example of `for..to..do` loop**
 
 ```pascal linenums="1"
+  {$mode objfpc}{$H+}{$J-}
+
 var
   i: integer;
+
 begin
   for i := 1 to 10 do
   begin
@@ -338,8 +341,11 @@ end.
 **Example of `for..downto..do` Loop**
 
 ```pascal linenums="1"
+  {$mode objfpc}{$H+}{$J-}
+
 var
   i: integer;
+
 begin
   for i := 10 downto 1 do
   begin
@@ -365,8 +371,11 @@ end;
 **Example**
 
 ```pascal linenums="1"
+  {$mode objfpc}{$H+}{$J-}
+
 var
   i: integer;
+
 begin
   i := 1;
   while i <= 10 do
@@ -392,8 +401,11 @@ until condition;
 **Example**
 
 ```pascal linenums="1"
+  {$mode objfpc}{$H+}{$J-}
+
 var
   i: integer;
+
 begin
   i := 1;
   repeat
@@ -431,8 +443,11 @@ end;
 **Example**
 
 ```pascal linenums="1"
+  {$mode objfpc}{$H+}{$J-}
+
 var
   grade: Char;
+
 begin
   Write('Enter a grade (A, B, C, D or F): ');
   ReadLn(grade);
@@ -510,6 +525,8 @@ end;
 **Example of `if..then` Statement**
 
 ```pascal linenums="1"
+  {$mode objfpc}{$H+}{$J-}
+
 var
   age: integer;
 begin
@@ -526,6 +543,8 @@ end.
 **Example of `if..then..else` Statement**
 
 ```pascal linenums="1"
+  {$mode objfpc}{$H+}{$J-}
+
 var
   age: integer;
 begin
@@ -546,6 +565,8 @@ end.
 **Example of many conditions with `else if` Statement**
 
 ```pascal linenums="1"
+  {$mode objfpc}{$H+}{$J-}
+
 var
   grade: char;
 begin
@@ -599,6 +620,8 @@ type
 **Example**
 
 ```pascal linenums="1"
+  {$mode objfpc}{$H+}{$J-}
+
 type
   TDay = (Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday);
 
@@ -622,14 +645,16 @@ end.
 **Example of an Enum in case statement**
 
 ```pascal linenums="1"
+  {$mode objfpc}{$H+}{$J-}
+
 type
   TColor = (Red, Green, Blue);
 
 var
-  Color: TColor;
+  color: TColor;
 begin
-  Color := Green;
-  case Color of
+  color := Green;
+  case color of
     Red: WriteLn('Red');
     Green: WriteLn('Green');
     Blue: WriteLn('Blue');
@@ -637,16 +662,224 @@ begin
 end.
 ```
 
+## String processing
 
-## Just for the `Record`
+### Length of a String
+
+Use `Length(str)` to find the length of a string.
+
+**Example**
+
+```pascal linenums="1" hl_lines="11"
+  {$mode objfpc}{$H+}{$J-}
+
+var
+  str:string;
+  len:integer;
+
+begin
+  str := 'Hello World!';
+  
+  // Get length of a string
+  len:=Length(str);
+  
+  WriteLn('Length of ', str, ' is ', len); // Output: Length of Hello World! is 12
+end.
+```
+
+### Finding Character at n-th Index
+
+**Syntax**
+
+```pascal linenums="1"
+a_string_var[index];
+```
+
+**Example**
+
+```pascal linenums="1" hl_lines="12"
+  {$mode objfpc}{$H+}{$J-}
+
+var
+  str: string;
+  ch: char;
+  index: integer;
+
+begin
+  str := 'Hello World!';
+  index := 1; // Change this value to test different indices
+
+  ch := str[index];
+  WriteLn('Character at index ', index, ' is: ', ch);
+end.
+```
+
+### Concat Strings
+
+You can concat string using the `+` operator or `Concat(str1,str2)`.
+
+**Example**
+
+```pascal linenums="1" hl_lines="11 15"
+  {$mode objfpc}{$H+}{$J-}
+
+var
+  str1, str2, result: string;
+
+begin
+  str1 := 'Hello, ';
+  str2 := 'world!';
+  
+  // Using + operator
+  result := str1 + str2;
+  WriteLn(result); // Output: Hello, world!
+  
+  // Using Concat function
+  result := Concat(str1, str2);
+  WriteLn(result); // Output: Hello, world!
+end.
+```
+
+### Replace Substring
+
+1. Include `SysUtils` in the `uses` section.
+2. Use `StringReplace(...)`.
+
+**Example**
+
+```pascal linenums="1" hl_lines="13"
+  {$mode objfpc}{$H+}{$J-}
+
+uses
+  SysUtils;
+
+var
+  str, result: string;
+
+begin
+  str := 'Hello, Pascal!';
+  
+  // Replacing 'Pascal' with 'world'
+  result := StringReplace(str, 'Pascal', 'world', [rfReplaceAll, rfIgnoreCase]);
+  WriteLn(result); // Output: Hello, world!
+end.
+```
+
+
+### Changing Case
+
+1. Include `SysUtils` in the `uses` section.
+2. Use `LowerCase(str)` or `UpperCase(str)`.
+
+**Example**
+
+```pascal linenums="1" hl_lines="4 13 17"
+  {$mode objfpc}{$H+}{$J-}
+
+uses
+  SysUtils;
+
+var
+  str, lowerStr, upperStr: string;
+
+begin
+  str := 'Hello, Pascal!';
+  
+  // Convert to lowercase
+  lowerStr := LowerCase(str);
+  WriteLn(lowerStr); // Output: hello, pascal!
+  
+  // Convert to uppercase
+  upperStr := UpperCase(str);
+  WriteLn(upperStr); // Output: HELLO, PASCAL!
+end.
+```
+
+### Searching for a Substring
+
+You can use `Pos(substr, str)` to find a position of a substring in a string.
+
+**Example**
+
+```pascal linenums="1" hl_lines="12"
+  {$mode objfpc}{$H+}{$J-}
+
+var
+  str, substr: string;
+  index: integer;
+
+begin
+  str := 'Hello, Pascal!';
+  substr := 'Pascal';
+  
+  // Find position of 'Pascal' in str
+  index := Pos(substr, str);
+  WriteLn('Position of "', substr, '" in "', str, '" is: ', index); // Output: 8
+end.
+
+```
+
+## Just for the `Record` ...
+
+A `record` is a data structure that allows you to group different types of data together. This feature in Free Pascal allow you to create complex data structures and manage related data efficiently.
+
+**Syntax**
+
+```pascal linenums="1"
+type
+  TRecordName = record
+    field1: dataType1;
+    field2: dataType2;
+    field3: dataType3;
+    // Add more fields as needed
+  end;
+```
+
+**Example**
+
+```pascal
+  {$mode objfpc}{$H+}{$J-}
+
+type
+  TPerson = record
+    name: string;
+    age: Integer;
+    height: Real;
+  end;
+
+var
+  person1, person2: TPerson;
+
+begin
+  // Assign values to the fields of Person1
+  person1.Name := 'Javert';
+  person1.Age := 30;
+  person1.Height := 5.9;
+
+  // Print the values of Person1
+  WriteLn('Person1 Name: ', person1.Name);
+  WriteLn('Person1 Age: ', person1.Age);
+  WriteLn('Person1 Height: ', person1.Height:0:2);
+
+  // Assign values to the fields of Person2
+  person2.Name := 'Jean Valjean';
+  person2.Age := 25;
+  person2.Height := 5.7;
+
+  // Print the values of Person2
+  WriteLn('Person2 Name: ', person2.Name);
+  WriteLn('Person2 Age: ', person2.Age);
+  WriteLn('Person2 Height: ', person2.Height:0:2);
+end.
+```
+
+## Arrays for Random Access
 
 ...
 
-
-## Text processing
+## Files and Text Processing
 
 ...
-
 
 ## Collection of values
 
