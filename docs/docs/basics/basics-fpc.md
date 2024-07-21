@@ -1126,6 +1126,8 @@ end.
 
 ## Classes
 
+Here is a simple example of creating a class. For mroe info, visit the official documentation; [Classes](https://www.freepascal.org/docs-html/ref/refch6.html#x69-930006). 
+
 **Syntax**
 
 ```pascal linenums="1"
