@@ -98,9 +98,7 @@ var
 Check out the official documentation [Types](https://www.freepascal.org/docs-html/ref/refch3.html#refse12.html) for a full list and explanation of the types you can use.
 
 
-## Console Input and Output
-
-### Read Input
+## Console Input
 
 In Free Pascal, `Read` and `ReadLn` are used for input, but they work a bit differently.
 
@@ -134,7 +132,7 @@ begin
 end.
 ```
 
-### Display Output
+## Console Output
 
 
 Similarly, `Write` and `WriteLn` are used to output text, but they behave differently.
@@ -305,13 +303,15 @@ And call the function like this:
 ```pascal linenums="1"
 var
   result: integer;
+
+  { Main Block }
 begin
   result := Add(3, 5);
   WriteLn('The sum is: ', result); // Will print 8
 end.
 ```
 
-## Loops - the `for` Statement
+## Loops - the `for..to/downto` Statement
 
 **Syntax**
 
@@ -330,6 +330,7 @@ end;
 var
   i: integer;
 
+  { Main Block }
 begin
   for i := 1 to 10 do
   begin
@@ -346,6 +347,7 @@ end.
 var
   i: integer;
 
+  { Main Block }
 begin
   for i := 10 downto 1 do
   begin
@@ -354,6 +356,47 @@ begin
 end.
 ```
 
+## Loops - the `for..in` Statement
+
+**Syntax**
+
+```pascal
+for element in collection do
+begin
+  // Your code here
+end;
+```
+
+**Example**
+
+```pascal
+program ForInLoop;
+
+{$mode objfpc}{$H+}{$J-}
+
+uses
+  SysUtils;
+
+var
+  numbers: array of integer;
+  num: integer;
+
+  { Main Block }
+begin
+  // Initialize the array
+  numbers := [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  // Use the for..in loop to iterate over the array
+  for num in numbers do
+  begin
+    WriteLn('Number: ', num);
+  end;
+
+  // Pause console
+  WriteLn('Press enter key to quit');
+  ReadLn;
+end.
+```
 
 ## Conditional Loops - `while` Statement
 
@@ -376,6 +419,7 @@ end;
 var
   i: integer;
 
+  { Main Block }
 begin
   i := 1;
   while i <= 10 do
@@ -406,6 +450,7 @@ until condition;
 var
   i: integer;
 
+  { Main Block }
 begin
   i := 1;
   repeat
@@ -448,6 +493,7 @@ end;
 var
   grade: Char;
 
+  { Main Block }
 begin
   Write('Enter a grade (A, B, C, D or F): ');
   ReadLn(grade);
@@ -529,6 +575,8 @@ end;
 
 var
   age: integer;
+
+  { Main Block }
 begin
   Write('Enter your age: ');
   ReadLn(age);
@@ -547,6 +595,8 @@ end.
 
 var
   age: integer;
+
+  { Main Block }
 begin
   Write('Enter your age: ');
   ReadLn(age);
@@ -569,6 +619,8 @@ end.
 
 var
   grade: char;
+
+  { Main Block }
 begin
   Write('Enter your grade (A, B, C, D, F): ');
   ReadLn(grade);
@@ -608,13 +660,14 @@ Use `Length(str)` to find the length of a string.
 
 **Example**
 
-```pascal linenums="1" hl_lines="11"
+```pascal linenums="1" hl_lines="12"
   {$mode objfpc}{$H+}{$J-}
 
 var
   str:string;
   len:integer;
 
+  { Main Block }
 begin
   str := 'Hello World!';
   
@@ -643,6 +696,7 @@ var
   ch: char;
   index: integer;
 
+  { Main Block }
 begin
   str := 'Hello World!';
   index := 1; // Change this value to test different indices
@@ -658,12 +712,13 @@ You can concat string using the `+` operator or `Concat(str1,str2)`.
 
 **Example**
 
-```pascal linenums="1" hl_lines="11 15"
+```pascal linenums="1" hl_lines="11 16"
   {$mode objfpc}{$H+}{$J-}
 
 var
   str1, str2, result: string;
 
+  { Main Block }
 begin
   str1 := 'Hello, ';
   str2 := 'world!';
@@ -685,7 +740,7 @@ end.
 
 **Example**
 
-```pascal linenums="1" hl_lines="13"
+```pascal linenums="1" hl_lines="14"
   {$mode objfpc}{$H+}{$J-}
 
 uses
@@ -694,6 +749,7 @@ uses
 var
   str, result: string;
 
+  { Main Block }
 begin
   str := 'Hello, Pascal!';
   
@@ -711,7 +767,7 @@ end.
 
 **Example**
 
-```pascal linenums="1" hl_lines="4 13 17"
+```pascal linenums="1" hl_lines="4 14 18"
   {$mode objfpc}{$H+}{$J-}
 
 uses
@@ -720,6 +776,7 @@ uses
 var
   str, lowerStr, upperStr: string;
 
+  { Main Block }
 begin
   str := 'Hello, Pascal!';
   
@@ -739,13 +796,14 @@ You can use `Pos(substr, str)` to find a position of a substring in a string.
 
 **Example**
 
-```pascal linenums="1" hl_lines="12"
+```pascal linenums="1" hl_lines="13"
   {$mode objfpc}{$H+}{$J-}
 
 var
   str, substr: string;
   index: integer;
 
+  { Main Block }
 begin
   str := 'Hello, Pascal!';
   substr := 'Pascal';
@@ -757,9 +815,9 @@ end.
 
 ```
 
-## Just for the `Record` ...
+## Records
 
-A `record` is a data structure that allows you to group different types of data together. This feature in Free Pascal allow you to create complex data structures and manage related data efficiently.
+Just for the `Record`, a `record` is a data structure that allows you to group different types of data together. This feature in Free Pascal allow you to create complex data structures and manage related data efficiently.
 
 **Syntax**
 
@@ -775,7 +833,7 @@ type
 
 **Example**
 
-```pascal
+```pascal linenums="1"
   {$mode objfpc}{$H+}{$J-}
 
 type
@@ -788,6 +846,7 @@ type
 var
   person1, person2: TPerson;
 
+  { Main Block }
 begin
   // Assign values to the fields of Person1
   person1.Name := 'Javert';
@@ -826,7 +885,6 @@ var
 
 **Example**
 
-
 ```pascal linenums="1"
 program StaticArrayExample;
 
@@ -834,6 +892,7 @@ var
   numbers: array[1..5] of integer;
   i: integer;
 
+  { Main Block }
 begin
   // Initialising the array
   numbers[1] := 10;
@@ -860,7 +919,6 @@ var
   arrayName: array of elementType;
 ```
 
-
 **Example**
 
 ```pascal linenums="1"
@@ -870,6 +928,7 @@ var
   numbers: array of integer;
   i: integer;
 
+  { Main Block }
 begin
   // Setting the length of the array
   SetLength(numbers, 5);
@@ -891,8 +950,75 @@ begin
   for i := 0 to High(numbers) do
     WriteLn('numbers[', i, '] = ', numbers[i]);
 end.
-
 ```
+
+### Concat Dynamic Arrays
+
+This operator is available in Delphi mode, but must be enabled explicily using the modeswitch arrayoperators in objfpc mode:
+
+```pascal linenums="1"
+{$mode objfpc}  
+{$modeswitch arrayoperators}
+```
+
+**Syntax**
+
+```pascal linenums="1"
+resultArray := array1 + array2;
+```
+
+
+**Example**
+
+```pascal linenums="1" hl_lines="4 33"
+program DynArrayConcat;
+
+  {$mode objfpc}{$H+}{$J-}
+  {$modeswitch arrayoperators}
+
+uses
+  SysUtils;
+
+type
+  TIntArray = array of integer;
+
+procedure PrintArray(arr: TIntArray);
+var
+  i: Integer;
+begin
+  for i := Low(arr) to High(arr) do
+    Write(arr[i], ' ');
+  WriteLn;
+end;
+
+var
+  arr1, arr2, resultArr: TIntArray;
+
+  { Main Block }
+begin
+  // Initialize the first array
+  arr1 := [1, 2, 3, 4, 5];
+
+  // Initialize the second array
+  arr2 := [6, 7, 8, 9, 10];
+
+  // Concatenate the arrays using the + operator
+  resultArr := arr1 + arr2;
+
+  // Print the arrays
+  WriteLn('Array 1:');
+  PrintArray(arr1);
+  WriteLn('Array 2:');
+  PrintArray(arr2);
+  WriteLn('Concatenated Array:');
+  PrintArray(resultArr);
+
+  // Pause console
+  ReadLn;
+end.
+```
+
+See more info on the [Dynamic Array Operators](https://www.freepascal.org/docs-html/ref/refsu48.html) document.
 
 ### Open Arrays
 
@@ -920,6 +1046,8 @@ end;
 
 var
   numbers: array[1..5] of integer;
+
+  { Main Block }
 begin
   // Initialising the array
   numbers[1] := 10;
@@ -957,6 +1085,8 @@ type
 
 var
   today: TDay;
+
+  { Main Block }
 begin
   // Assign today var to TDay.Wednesday 
   today := Wednesday;
@@ -982,6 +1112,8 @@ type
 
 var
   color: TColor;
+
+  { Main Block }
 begin
   color := Green;
   case color of
