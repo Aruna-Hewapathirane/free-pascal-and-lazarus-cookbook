@@ -311,7 +311,7 @@ begin
 end.
 ```
 
-## Loops - the `for..to/downto` Statement
+## Loops - the `for..to` Statement
 
 **Syntax**
 
@@ -1123,6 +1123,10 @@ begin
   end;
 end.
 ```
+
+## Classes
+
+...
 
 
 ## Processing Text File
