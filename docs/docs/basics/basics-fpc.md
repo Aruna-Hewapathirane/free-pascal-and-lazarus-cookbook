@@ -1187,8 +1187,8 @@ begin
   Person := TPerson.Create('John Doe', 28);
 
   // Access properties
-  Person.Name := 'Jean Valjean';
-  Person.Age := 32;
+  Person.Name := 'Waldo Catto';
+  Person.Age := 18;
 
   // Display information
   Person.DisplayInfo;
