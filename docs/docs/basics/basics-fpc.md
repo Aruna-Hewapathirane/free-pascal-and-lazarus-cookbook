@@ -821,6 +821,57 @@ end.
 
 ```
 
+## Pointers
+
+> ... Avoid pointer whenever alternatives exist. If you want to learn, though, there's no silver bullet apart from: There has to be as many `Dispose` as `New`, period. 
+> 
+> Source: [Leledumbo's reply on 'Dispose of Pointer', 2023-08-10](https://forum.lazarus.freepascal.org/index.php/topic,64238.msg487999.html#msg487999).
+ 
+**Example**
+
+```pascal linenums="1"
+program PointerExample;
+
+var
+  ptr: ^integer;  // Declare a pointer to Integer
+  value: integer;
+
+begin
+  New(ptr);           // Allocate memory for an Integer
+  ptr^ := 42;         // Assign value 42 to the memory location
+  value := ptr^;      // Access the value through the pointer
+
+  Writeln('Value pointed to by ptr: ', value);
+
+  Dispose(ptr);       // Free the allocated memory
+end.
+```
+
+### Safe Usage Tips
+
+1. **Always Initialize Pointers**: Before using a pointer, make sure it points to valid memory. Uninitialized pointers can cause undefined behavior.
+
+2. **Check for nil**: It’s good practice to check if a pointer is nil (i.e., not pointing to any memory) before using it:
+
+```pascal linenums="1"
+if ptr <> nil then
+  Writeln(ptr^);
+```
+
+3. **Avoid Memory Leaks**: Always pair New with Dispose to prevent memory leaks. If you forget to free the allocated memory, it will not be available for other parts of your program or system.
+
+4. **Don’t Use Freed Pointers**: After calling Dispose, the pointer still holds the address of the freed memory. Set it to nil to avoid accidental use:
+
+```pascal linenums="1"
+Dispose(ptr);
+ptr := nil;
+```
+
+5. **Be Cautious with Pointer Arithmetic**: Although not commonly needed in high-level Pascal programming, pointer arithmetic (e.g., incrementing pointers) should be done carefully to avoid accessing invalid memory areas.
+ 
+More info? See [Pointers](https://www.freepascal.org/docs-html/ref/refse15.html#x42-620003.4) and [Memory Management](https://wiki.freepascal.org/Memory_Management).
+
+
 ## Records
 
 Just for the `Record`, a `record` is a data structure that allows you to group different types of data together. This feature in Free Pascal allow you to create complex data structures and manage related data efficiently.
@@ -1470,6 +1521,5 @@ The GUID is like a special label that makes sure you’re talking to the exact r
 ...
 
 
-## Pointers
 
-...
+
