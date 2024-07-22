@@ -98,7 +98,9 @@ var
 Check out the official documentation [Types](https://www.freepascal.org/docs-html/ref/refch3.html#refse12.html) for a full list and explanation of the types you can use.
 
 
-## Console Input
+## Console 
+
+### User Input
 
 In Free Pascal, `Read` and `ReadLn` are used for input, but they work a bit differently.
 
@@ -132,7 +134,7 @@ begin
 end.
 ```
 
-## Console Output
+### Display Text
 
 
 Similarly, `Write` and `WriteLn` are used to output text, but they behave differently.
