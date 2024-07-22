@@ -311,7 +311,9 @@ begin
 end.
 ```
 
-## Loops - the `for..to` Statement
+## Loops
+
+### The `for..to` Statement
 
 **Syntax**
 
@@ -356,7 +358,7 @@ begin
 end.
 ```
 
-## Loops - the `for..in` Statement
+### The `for..in` Statement
 
 **Syntax**
 
@@ -398,7 +400,9 @@ begin
 end.
 ```
 
-## Conditional Loops - `while` Statement
+## Conditional Loops 
+
+### The `while` Statement
 
 The `while` loop is used to repeat a block of statements as long as a condition is true.
 
@@ -430,7 +434,7 @@ begin
 end.
 ```
 
-## Conditional Loops - `repeat` Statement
+### The `repeat` Statement
 
 The `repeat..until` loop is similar to the `while` loop, but the condition is checked after the loop has executed, ensuring the statements are executed at least once.
 
@@ -460,7 +464,7 @@ begin
 end.
 ```
 
-## Choices - the `case` Statement
+## Choices - The `case` Statement
 
 **Syntax**
 
@@ -527,7 +531,7 @@ begin
 end.
 ```
 
-## Decisions - the `if` Statement
+## Decisions - The `if` Statement
 
 **Syntax**
 
