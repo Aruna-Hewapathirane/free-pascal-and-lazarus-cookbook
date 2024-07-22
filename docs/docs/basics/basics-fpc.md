@@ -858,9 +858,9 @@ if ptr <> nil then
   Writeln(ptr^);
 ```
 
-3. **Avoid Memory Leaks**: Always pair New with Dispose to prevent memory leaks. If you forget to free the allocated memory, it will not be available for other parts of your program or system.
+3. **Avoid Memory Leaks**: Always pair `New` with `Dispose` to prevent memory leaks. If you forget to free the allocated memory, it will not be available for other parts of your program or system.
 
-4. **Don’t Use Freed Pointers**: After calling Dispose, the pointer still holds the address of the freed memory. Set it to nil to avoid accidental use:
+4. **Don’t Use Freed Pointers**: After calling `Dispose`, the pointer still holds the address of the freed memory. Set it to `nil` to avoid accidental use:
 
 ```pascal linenums="1"
 Dispose(ptr);
