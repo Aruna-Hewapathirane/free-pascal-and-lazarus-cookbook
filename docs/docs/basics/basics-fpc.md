@@ -1202,12 +1202,264 @@ begin
 end.
 ```
 
+## Interfaces
+
+Refer to the official doc [Interfaces](https://www.freepascal.org/docs-html/ref/refch7.html#x96-1200007) for more info.
+
+- Interfaces can only be used in `delphi` or `objfpc` modes. 
+- All parts of an `interface` are always `public`, so you can't hide them.
+- Properties can only have methods to get or set their values. 
+- You can't create interfaces directly. Instead, you need a `class` that uses the `interface`.
+- You can only use calling convention modifiers in methods within an interface. You can't use special modifiers like `virtual`, `abstract`, `dynamic`, or `override` in an `interface`.
+
+**Syntax**
+
+1. Define the Interface: Use the `interface` keyword to define an interface, specifying the methods (and properties, if any) that any implementing class must provide.
+
+2. Implement the Interface in a Class: Use the `class` keyword to define a class that implements the interface. The class **must provide concrete implementations** for all the methods and properties declared in the interface.
+
+
+**Example**
+
+This example defines a simple interface `IMyInterface` with one method `DoSomething`, and then implement this interface in a class `TMyClass`.
+
+**1. Define the Interface**
+
+```pascal linenums="1"
+type
+  IMyInterface = interface
+    ['{12345678-1234-1234-1234-1234567890AB}'] // Unique identifier (GUID) for the interface
+    procedure DoSomething;
+  end;
+```
+
+**Step 2: Implement the Interface in a Class**
+
+```pascal linenums="1"
+type
+  TMyClass = class(TInterfacedObject, IMyInterface)
+  public
+    procedure DoSomething;
+  end;
+
+procedure TMyClass.DoSomething;
+begin
+  WriteLn('Doing something...');
+end;
+```
+
+**Step 3: Use the Interface and Class**
+
+```pascal linenums="1"
+var
+  MyObject: IMyInterface;
+begin
+  MyObject := TMyClass.Create;
+  MyObject.DoSomething;
+end.
+```
+
+**Complete Example**
+
+```pascal linenums="1"
+program InterfaceExample;
+
+{$mode objfpc}{$H+}{$J-}
+
+type
+  // Step 1: Define the Interface
+  IMyInterface = interface
+    ['{12345678-1234-1234-1234-1234567890AB}'] // Unique identifier (GUID) for the interface
+    procedure DoSomething;
+  end;
+
+  // Step 2: Implement the Interface in a Class
+  TMyClass = class(TInterfacedObject, IMyInterface)
+  public
+    procedure DoSomething;
+  end;
+
+procedure TMyClass.DoSomething;
+begin
+  WriteLn('Doing something...');
+end;
+
+var
+  MyObject: IMyInterface;
+begin
+  // Step 3: Use the Interface and Class
+  MyObject := TMyClass.Create;
+  MyObject.DoSomething;
+end.
+```
+
+- The GUID `['{12345678-1234-1234-1234-1234567890AB}']` is required for COM compatibility but can be a unique identifier in your application.
+- `TInterfacedObject` is a base class that implements `IUnknown`, which is the ancestor of all interfaces. This ensures proper reference counting for memory management.
+
+## More on Interfaces
+
+### What is a GUID?
+
+A GUID is like a super-unique name tag. Imagine you're at a huge event with thousands of people, and everyone needs to wear a name tag to avoid confusion. Each name tag has to be unique so that when someone calls out a name, only one person responds. That's what a GUID does for interfaces in programming.
+
+### Why do we need a GUID for interfaces?
+
+When we create interfaces in programming, we often have many different interfaces that might look similar. The GUID helps us keep track of each one and makes sure there's no mix-up. Here’s why this is important:
+
+1. **Uniqueness**: Just like a unique name tag, a GUID makes sure that each interface is uniquely identified. No two interfaces will have the same GUID.
+
+2. **Identification**: When your program is running, it might need to check if an object (a piece of data or a function) follows a certain set of rules (an interface). The GUID is used to ask,*"Do you follow these rules?"* and get a clear answer.
+
+3. **Compatibility**: In complex programs or systems that involve many parts working together, like different pieces of software communicating with each other, the GUID ensures that they all understand each other correctly. It's like a universal language for interfaces.
+
+### Example to Understand GUID
+
+Imagine you're organizing a science fair. Each project needs a unique ID so judges know exactly which project they're looking at. Without unique IDs, two projects could have the same name, leading to confusion. GUIDs work the same way for interfaces in programming.
+
+### Practical Example in Programming
+
+Here's a simple example in Free Pascal:
+
+1. Define the Interface with a GUID
+
+```pascal linenums="1"
+type
+  IMyInterface = interface
+    ['{12345678-1234-1234-1234-1234567890AB}'] // This is the GUID
+    procedure DoSomething;
+  end;
+```
+
+2. Implement the Interface in a Class
+
+```pascal linenums="1"
+type
+  TMyClass = class(TInterfacedObject, IMyInterface)
+  public
+    procedure DoSomething;
+  end;
+
+procedure TMyClass.DoSomething;
+begin
+  WriteLn('Doing something...');
+end;
+```
+
+3. Use the Interface and Class
+
+```pascal linenums="1"
+var
+  MyObject: IMyInterface;
+begin
+  MyObject := TMyClass.Create;
+  MyObject.DoSomething;
+end.
+```
+
+### Breaking Down the Example
+
+- **Define the Interface**: `IMyInterface` is like a rulebook that says any class that follows it must have a `DoSomething` procedure.
+- **GUID**: `{12345678-1234-1234-1234-1234567890AB}` is a unique identifier for IMyInterface. It's like saying, *"This rulebook has a unique ID so there's no confusion."*
+- **Implement the Interface**: `TMyClass` says, *"I follow the IMyInterface rulebook and provide a DoSomething procedure."*
+- **Using the Interface**: The program creates an instance of `TMyClass` and calls `DoSomething` on it, knowing exactly which rules it's following because of the GUID.
+
+### Summary
+
+- GUIDs are unique identifiers that ensure interfaces are uniquely recognized.
+- They help prevent confusion in large and complex systems.
+- They allow programs to check if objects follow specific rules (interfaces) correctly.
+- Think of a GUID as a unique fingerprint for an interface, ensuring it’s always identified correctly and uniquely in a program.
+
+
+## Even More on Interfaces
+
+
+### What is a Function?
+
+Think of a function as a recipe. If you have a recipe for chocolate chip cookies, you follow those instructions every time you want cookies. You don’t need to worry about the recipe being mixed up with other recipes because you have the name of the recipe right there.
+
+### What is an Interface?
+
+An interface is like a contract or a blueprint that tells different objects (think of them as different people or tools) how they should behave. For instance, imagine you have a blueprint for different types of devices that can play music, like a smartphone, a tablet, or a speaker. Each of these devices follows the same set of instructions (the interface) for how to play music, but they might play it differently.
+
+### Why Does an Interface Need a GUID?
+
+**Unique Identification:**
+
+- **Functions**: In a program, you call functions by their names. If you want to bake cookies, you just call the "cookie recipe" function. There's no need for a special identifier because each function name is unique within its context.
+- **Interfaces**: Different interfaces might have similar methods, but they need a way to be uniquely identified. This is because many objects (devices) can follow the same interface (blueprint). The GUID acts like a unique serial number to make sure you’re dealing with the exact right blueprint.
+
+**Multiple Implementations:**
+
+- **Functions**: Each function is a specific set of instructions in your code. If you call a function, you're calling a specific set of instructions.
+- **Interfaces**: An interface can be implemented by many different classes (objects). For example, you could have a `Player` interface for different types of media players. Each player (smartphone, tablet, speaker) will follow the same `Player` interface but might have different ways of playing the music. The GUID helps ensure that when you ask for a `Player`, you get the right kind of `Player`.
+
+**Checking at Runtime:**
+
+- **Functions**: When your program runs, it directly calls functions by their names. No extra checking is needed because you know exactly what function you're calling.
+- **Interfaces**: Sometimes, you need to check if an object follows a particular interface, especially if you’re not sure what kind of object you have. The GUID helps you confirm that the object adheres to the right blueprint.
+
+### Simple Analogy
+
+Imagine you're at a huge convention where every booth has a unique ID number. Each booth might have a different type of product, but the unique ID ensures that when you ask for a specific type of product, you find the right booth.
+
+- **Functions**: Like knowing the exact name of a recipe.
+- **Interfaces**: Like having a unique ID for each type of product to make sure you get the right one.
+
+### Example in Programming
+
+Let's say you have an interface called `IDriveable` that any vehicle (like cars or bikes) should implement.
+
+Interface Definition:
+
+```pascal linenums="1"
+type
+  IDriveable = interface
+    ['{11111111-1111-1111-1111-111111111111}'] // Unique ID
+    procedure Drive;
+  end;
+  ```
+
+Class Implementing the Interface:
+
+```pascal linenums="1"
+type
+  TCar = class(TInterfacedObject, IDriveable)
+  public
+    procedure Drive;
+  end;
+
+procedure TCar.Drive;
+begin
+  WriteLn('Driving a car...');
+end;
+
+```
+
+Using the Interface:
+
+```pascal linenums="1"
+var
+  Vehicle: IDriveable;
+  MyCar: TCar;
+begin
+  MyCar := TCar.Create;
+  Vehicle := MyCar;
+  Vehicle.Drive; // Calls the Drive method from TCar
+end.
+```
+
+In this example, `IDriveable` has a unique `GUID`, so even if you have many different classes (like `TCar`, `TBike`) that implement IDriveable, the GUID ensures you’re interacting with the right interface.
+
+### Summary
+
+- **GUID for Interfaces**: Ensures each interface is uniquely identified, especially when dealing with multiple implementations.
+- **Ordinary Functions**: Are unique by their names within their code context, so they don’t need an extra unique identifier.
+
+The GUID is like a special label that makes sure you’re talking to the exact right set of instructions (interface) among many possibilities.
+
+
 ## Processing Text File
-
-...
-
-
-## Collection of values
 
 ...
 
