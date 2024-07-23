@@ -251,6 +251,84 @@ begin
 end.
 ```
 
+
+## Format Strings
+
+### Format Numbers with Commas
+
+1. **Include the `SysUtils` unit**, as the `Format` function is part of this unit.
+2. Use the `Format` function with appropriate format specifiers.
+
+See [Format](https://www.freepascal.org/docs-html/rtl/sysutils/format.html) for more info.
+
+**Example**
+
+```pascal linenums="1" hl_lines="5 6 16"
+program FormatNumberCommas;
+
+{$mode objfpc}{$H+}{$J-}
+
+uses
+  SysUtils;
+
+var
+  number: int64;
+  formattedNumber: string;
+
+  { Main Block }
+begin
+  // Formatting a number with commas
+  number := 12345678;
+  formattedNumber := Format('%.0n', [number * 1.0]);
+  WriteLn('Formatted Number: ', formattedNumber);  // Output: 12,345,678
+
+  // Pause console
+  WriteLn('Press enter key to exit');
+  ReadLn;
+end.
+```
+
+- `'%.0n'` format specifier means *"format as a number with no decimal places, using the locale's thousands separator"*.
+
+### Format Numbers as Currency
+
+1. **Include the `SysUtils` unit**, as the `CurrToStrF` function is part of this unit.
+2. Use the `CurrToStrF` function with appropriate format specifiers and decimal place.
+
+See [`CurrToStrF`](https://www.freepascal.org/docs-html/3.2.2/rtl/sysutils/currtostrf.html) for more info.
+
+**Example**
+
+```pascal linenums="1" hl_lines="5 6 15"
+program FormatCurrency;
+
+{$mode objfpc}{$H+}{$J-}
+
+uses
+  SysUtils;
+
+var
+  amount: currency;
+  formattedAmount: string;
+
+  { Main Block }
+begin
+  amount := 12345678.90;
+  formattedAmount := CurrToStrF(amount, ffCurrency, 2);
+  WriteLn(formattedAmount);  // Output: $12,345,678.90
+
+  // Pause console
+  WriteLn('Press enter to quit');
+  ReadLn;
+end.
+```
+
+- [`CurrToStrF`](https://www.freepascal.org/docs-html/3.2.2/rtl/sysutils/currtostrf.html) function: This formats a number as currency. The parameters are:
+    - The number to format.
+    - `ffCurrency`: A format specifier indicating that we want currency formatting.
+    - `2`: The number of decimal places.
+
+
 ## Round Floats 
 
 ### To Nearest Integers
@@ -354,83 +432,6 @@ begin
   ReadLn;
 end.
 ```
-
-## Format Strings
-
-### Format Numbers with Commas
-
-1. **Include the `SysUtils` unit**, as the `Format` function is part of this unit.
-2. Use the `Format` function with appropriate format specifiers.
-
-See [Format](https://www.freepascal.org/docs-html/rtl/sysutils/format.html) for more info.
-
-**Example**
-
-```pascal linenums="1" hl_lines="5 6 16"
-program FormatNumberCommas;
-
-{$mode objfpc}{$H+}{$J-}
-
-uses
-  SysUtils;
-
-var
-  number: int64;
-  formattedNumber: string;
-
-  { Main Block }
-begin
-  // Formatting a number with commas
-  number := 12345678;
-  formattedNumber := Format('%.0n', [number * 1.0]);
-  WriteLn('Formatted Number: ', formattedNumber);  // Output: 12,345,678
-
-  // Pause console
-  WriteLn('Press enter key to exit');
-  ReadLn;
-end.
-```
-
-- `'%.0n'` format specifier means *"format as a number with no decimal places, using the locale's thousands separator"*.
-
-### Format Numbers as Currency
-
-1. **Include the `SysUtils` unit**, as the `CurrToStrF` function is part of this unit.
-2. Use the `CurrToStrF` function with appropriate format specifiers and decimal place.
-
-See [`CurrToStrF`](https://www.freepascal.org/docs-html/3.2.2/rtl/sysutils/currtostrf.html) for more info.
-
-**Example**
-
-```pascal linenums="1" hl_lines="5 6 15"
-program FormatCurrency;
-
-{$mode objfpc}{$H+}{$J-}
-
-uses
-  SysUtils;
-
-var
-  amount: currency;
-  formattedAmount: string;
-
-  { Main Block }
-begin
-  amount := 12345678.90;
-  formattedAmount := CurrToStrF(amount, ffCurrency, 2);
-  WriteLn(formattedAmount);  // Output: $12,345,678.90
-
-  // Pause console
-  WriteLn('Press enter to quit');
-  ReadLn;
-end.
-```
-
-- [`CurrToStrF`](https://www.freepascal.org/docs-html/3.2.2/rtl/sysutils/currtostrf.html) function: This formats a number as currency. The parameters are:
-    - The number to format.
-    - `ffCurrency`: A format specifier indicating that we want currency formatting.
-    - `2`: The number of decimal places.
-
 
 ## Procedures and Functions
 
