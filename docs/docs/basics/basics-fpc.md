@@ -309,8 +309,6 @@ end.
 
 ## Round Floats to `n` Decimal Places
 
-### Standard Rounding
-
 Use the [RoundTo](https://www.freepascal.org/docs-html/rtl/math/roundto.html) function.
 
 **Example**
@@ -336,45 +334,6 @@ begin
   rounded := RoundTo(num, -n);
 
   WriteLn('Rounded Number: ', rounded: 0: 4);  // Format to 4 decimal places
-
-  // Pause console
-  WriteLn('Press enter key to exit');
-  ReadLn;
-end.
-```
-
-### Banker's Rounding
-
-Here is a way to achieve it.
-
-```pascal linenums="1"
-program NDecimalRoundingBanker;
-
-{$mode objfpc}{$H+}{$J-}
-
-uses
-  Math;
-
-var
-  originalValue: double;
-  roundedValue: double;
-  tempValue: double;
-
-{ Main Block }
-begin
-  originalValue := 12345.678850;
-
-  // First, multiply by 10000 to move the decimal point
-  tempValue := originalValue * 10000;
-
-  // Round to the nearest integer (banker's rounding happens here)
-  tempValue := Round(tempValue);
-
-  // Then divide by 10000 to move the decimal point back
-  roundedValue := tempValue / 10000;
-
-  WriteLn('Original value        : ', originalValue: 0: 6);
-  writeln('Bankers rounded value : ', roundedValue : 0: 4);
 
   // Pause console
   WriteLn('Press enter key to exit');
