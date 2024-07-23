@@ -2,7 +2,7 @@
 
 ## Greetings!
 
-This page is my ultimate guide to the key basics of Object Pascal with the [Free Pascal Compiler](https://www.freepascal.org). It's not a complete guide, but it’s got all the essentials to help you dive in and discover just how powerful Free Pascal can be!
+This page is my go-to guide to the key basics of Object Pascal with the [Free Pascal Compiler](https://www.freepascal.org). It's not a complete guide, but it’s got all the essentials to help you dive in and discover just how powerful Free Pascal can be!
 
 Hope you find it super helpful! 🚀
 
