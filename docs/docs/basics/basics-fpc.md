@@ -1,5 +1,11 @@
 # Basics of Object Pascal using FPC
 
+## Greetings!
+
+This page is my ultimate guide to the key basics of Object Pascal with the [Free Pascal Compiler](https://www.freepascal.org). It's not a complete guide, but it’s got all the essentials to help you dive in and discover just how powerful Free Pascal can be!
+
+Hope you find it super helpful! 🚀
+
 ## Reserved Words
 
 Reserved words are special words in the Pascal language that you cannot change or redefine.
