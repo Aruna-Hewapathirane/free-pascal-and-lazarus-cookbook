@@ -1008,55 +1008,346 @@ end.
 
 ```
 
-## Pointers
+## Enum Types
 
-> ... Avoid pointer whenever alternatives exist. If you want to learn, though, there's no silver bullet apart from: There has to be as many `Dispose` as `New`, period. 
-> 
-> Source: [Leledumbo's reply on 'Dispose of Pointer', 2023-08-10](https://forum.lazarus.freepascal.org/index.php/topic,64238.msg487999.html#msg487999).
- 
+In Free Pascal, enumerated ordinal types are user-defined types that consist of a set of named values. These values are called enumeration constants, and each constant has an associated integer value, starting from 0 by default. 
+
+Enumerated types provide a way to define a variable that can only take one of a specified set of values, making the code more readable and type-safe.
+
+**Syntax**
+
+```pascal linenums="1"
+type
+  TEnumName = (Value1, Value2, Value3, ...);
+```
+
 **Example**
 
 ```pascal linenums="1"
-program PointerExample;
+  {$mode objfpc}{$H+}{$J-}
+
+type
+  TDay = (Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday);
 
 var
-  ptr: ^integer;  // Declare a pointer to Integer
-  value: integer;
+  today: TDay;
 
+  { Main Block }
 begin
-  New(ptr);           // Allocate memory for an Integer
-  ptr^ := 42;         // Assign value 42 to the memory location
-  value := ptr^;      // Access the value through the pointer
+  // Assign today var to TDay.Wednesday 
+  today := Wednesday;
+  
+  WriteLn('Integer(today)      gives ', Integer(today));     // Prints 3
+  WriteLn('Integer(Wednesday)) gives ', Integer(Wednesday)); // Prints 3
+  WriteLn('TDay(0)             gives ', TDay(0));            // Prints Sunday
 
-  Writeln('Value pointed to by ptr: ', value);
-
-  Dispose(ptr);       // Free the allocated memory
+  if today = Wednesday then
+  begin
+    WriteLn('Today is Wednesday');
+  end;
 end.
 ```
 
-### Safe Usage Tips
-
-1. **Always Initialize Pointers**: Before using a pointer, make sure it points to valid memory. Uninitialized pointers can cause undefined behavior.
-
-2. **Check for nil**: It’s good practice to check if a pointer is nil (i.e., not pointing to any memory) before using it:
+**Example of an Enum in case statement**
 
 ```pascal linenums="1"
-if ptr <> nil then
-  Writeln(ptr^);
+  {$mode objfpc}{$H+}{$J-}
+
+type
+  TColor = (Red, Green, Blue);
+
+var
+  color: TColor;
+
+  { Main Block }
+begin
+  color := Green;
+  case color of
+    Red: WriteLn('Red');
+    Green: WriteLn('Green');
+    Blue: WriteLn('Blue');
+  end;
+end.
 ```
 
-3. **Avoid Memory Leaks**: Always pair `New` with `Dispose` to prevent memory leaks. If you forget to free the allocated memory, it will not be available for other parts of your program or system.
+## Subrange Types
 
-4. **Don’t Use Freed Pointers**: After calling `Dispose`, the pointer still holds the address of the freed memory. Set it to `nil` to avoid accidental use:
+A subrange is a subset of values within a specific range. In Free Pascal, subranges allow you to limit the values a variable can hold, which can help catch errors and make your code more robust and readable.
+
+**Syntax**
 
 ```pascal linenums="1"
-Dispose(ptr);
-ptr := nil;
+type
+  SubrangeType = LowValue..HighValue;
 ```
 
-5. **Be Cautious with Pointer Arithmetic**: Although not commonly needed in high-level Pascal programming, pointer arithmetic (e.g., incrementing pointers) should be done carefully to avoid accessing invalid memory areas.
- 
-More info? See [Pointers](https://www.freepascal.org/docs-html/ref/refse15.html#x42-620003.4) and [Memory Management](https://wiki.freepascal.org/Memory_Management).
+**Example**
+
+```pascal linenums="1"
+program SubrangeDaysofWeek;
+
+  {$mode objfpc}{$H+}{$J-}
+
+type
+  // Define a subrange type for days of the week (1 = Sunday, 7 = Saturday)
+  TDayOfWeek = 1..7;
+
+var
+  // Declare a variable of type TDayOfWeek
+  day: TDayOfWeek;
+
+  { Main Block }
+begin
+  // Assign a valid value within the subrange to the variable
+  day := 3;  // 3 represents Tuesday
+  WriteLn('Day of the week is: ', day);
+
+  // Uncommenting the following line would cause a compile-time error
+  // because 8 is not within the defined subrange
+  // day := 8;  // This will cause a compile-time error
+
+  // Pause console
+  WriteLn('Press enter key to quit');
+  ReadLn;
+end.
+```
+
+!!! Note
+
+    **Why Not Just Use Integer?**
+    
+    Using a subrange like `TDayOfWeek` instead of a plain integer provides type safety. It ensures that the variable `day` can only be assigned values within the defined range (`1` to `7`). 
+    
+    This (1) helps prevent errors and makes your code more robust and (2) readable. For example, if you accidentally try to assign a value outside the range, the compiler will catch the error.
+
+## Arrays
+
+Arrays are useful when you need to handle multiple values of the same type. For example, if you have grades for students, you can use an array to store all these grades and easily access each one by its position.
+
+### Defining Arrays
+
+**1. Directly in the var section**
+
+```pascal linenums="1"
+var
+  numbers: array[1..5] of integer;
+```
+
+**2. Using the type section**
+
+
+```pascal linenums="1"
+type
+  TNumberArray = array[1..5] of Integer;
+
+var
+  numbers: TNumberArray;
+```
+
+### Working with Arrays
+
+**Example**
+
+```pascal linenums="1"
+var
+  numbers: array[1..5] of Integer;
+
+  { Main Block }
+begin
+  numbers[1] := 10;  // Set the first element to 10
+  numbers[2] := 20;  // Set the second element to 20
+  writeln(numbers[1]); // This will print 10
+end.
+```
+
+### Static Arrays
+
+Static arrays have a fixed size defined at compile time.
+
+**Syntax**
+
+```pascal linenums="1"
+var
+  arrayName: array[startIndex..endIndex] of elementType;
+```
+
+**Example**
+
+```pascal linenums="1"
+program StaticArrayExample;
+
+var
+  numbers: array[1..5] of integer;
+  i: integer;
+
+  { Main Block }
+begin
+  // Initialising the array
+  numbers[1] := 10;
+  numbers[2] := 20;
+  numbers[3] := 30;
+  numbers[4] := 40;
+  numbers[5] := 50;
+
+  // Accessing and printing array elements
+  for i := 1 to 5 do
+    WriteLn('numbers[', i, '] = ', numbers[i]);
+end.
+
+```
+
+### Dynamic Arrays
+
+Dynamic arrays can be resized at runtime using the `SetLength` procedure.
+
+**Syntax**
+
+```pascal linenums="1"
+var
+  arrayName: array of elementType;
+```
+
+**Example**
+
+```pascal linenums="1"
+program DynamicArrayExample;
+
+var
+  numbers: array of integer;
+  i: integer;
+
+  { Main Block }
+begin
+  // Setting the length of the array
+  SetLength(numbers, 5);
+
+  // Initialising the array
+  for i := 0 to High(numbers) do
+    numbers[i] := (i + 1) * 10;
+
+  // Accessing and printing array elements
+  for i := 0 to High(numbers) do
+    WriteLn('numbers[', i, '] = ', numbers[i]);
+
+  // Resizing the array
+  SetLength(numbers, 10);
+  for i := 5 to 9 do
+    numbers[i] := (i + 1) * 10;
+
+  // Accessing and printing array elements after resizing
+  for i := 0 to High(numbers) do
+    WriteLn('numbers[', i, '] = ', numbers[i]);
+end.
+```
+
+### Concat Dynamic Arrays
+
+This operator is available in Delphi mode, but must be enabled explicily using the modeswitch arrayoperators in objfpc mode:
+
+```pascal linenums="1"
+{$mode objfpc}  
+{$modeswitch arrayoperators}
+```
+
+**Syntax**
+
+```pascal linenums="1"
+resultArray := array1 + array2;
+```
+
+
+**Example**
+
+```pascal linenums="1" hl_lines="4 33"
+program DynArrayConcat;
+
+  {$mode objfpc}{$H+}{$J-}
+  {$modeswitch arrayoperators}
+
+uses
+  SysUtils;
+
+type
+  TIntArray = array of integer;
+
+procedure PrintArray(arr: TIntArray);
+var
+  i: Integer;
+begin
+  for i := Low(arr) to High(arr) do
+    Write(arr[i], ' ');
+  WriteLn;
+end;
+
+var
+  arr1, arr2, resultArr: TIntArray;
+
+  { Main Block }
+begin
+  // Initialize the first array
+  arr1 := [1, 2, 3, 4, 5];
+
+  // Initialize the second array
+  arr2 := [6, 7, 8, 9, 10];
+
+  // Concatenate the arrays using the + operator
+  resultArr := arr1 + arr2;
+
+  // Print the arrays
+  WriteLn('Array 1:');
+  PrintArray(arr1);
+  WriteLn('Array 2:');
+  PrintArray(arr2);
+  WriteLn('Concatenated Array:');
+  PrintArray(resultArr);
+
+  // Pause console
+  ReadLn;
+end.
+```
+
+See more info on the [Dynamic Array Operators](https://www.freepascal.org/docs-html/ref/refsu48.html) document.
+
+### Open Arrays
+
+Open arrays are typically used in procedures or functions to accept arrays of varying sizes.
+
+**Syntax**
+
+```pascal linenums="1"
+procedure ProcedureName(arrayName: array of elementType);
+```
+
+
+**Example**
+
+```pascal linenums="1"
+program OpenArrayExample;
+
+procedure PrintArray(arr: array of integer);
+var
+  i: integer;
+begin
+  for i := Low(arr) to High(arr) do
+    WriteLn('arr[', i, '] = ', arr[i]);
+end;
+
+var
+  numbers: array[1..5] of integer;
+
+  { Main Block }
+begin
+  // Initialising the array
+  numbers[1] := 10;
+  numbers[2] := 20;
+  numbers[3] := 30;
+  numbers[4] := 40;
+  numbers[5] := 50;
+
+  // Passing the array to the procedure
+  PrintArray(numbers);
+end.
+```
 
 
 ## Records
@@ -1293,297 +1584,57 @@ begin
 end.
 ```
 
-## Arrays
 
-Arrays are useful when you need to handle multiple values of the same type. For example, if you have grades for students, you can use an array to store all these grades and easily access each one by its position.
+## Pointers
 
-### Defining Arrays
-
-**1. Directly in the var section**
-
-```pascal linenums="1"
-var
-  numbers: array[1..5] of integer;
-```
-
-**2. Using the type section**
-
-
-```pascal linenums="1"
-type
-  TNumberArray = array[1..5] of Integer;
-
-var
-  numbers: TNumberArray;
-```
-
-### Working with Arrays
-
+> ... Avoid pointer whenever alternatives exist. If you want to learn, though, there's no silver bullet apart from: There has to be as many `Dispose` as `New`, period. 
+> 
+> Source: [Leledumbo's reply on 'Dispose of Pointer', 2023-08-10](https://forum.lazarus.freepascal.org/index.php/topic,64238.msg487999.html#msg487999).
+ 
 **Example**
 
 ```pascal linenums="1"
-var
-  numbers: array[1..5] of Integer;
+program PointerExample;
 
-  { Main Block }
+var
+  ptr: ^integer;  // Declare a pointer to Integer
+  value: integer;
+
 begin
-  numbers[1] := 10;  // Set the first element to 10
-  numbers[2] := 20;  // Set the second element to 20
-  writeln(numbers[1]); // This will print 10
+  New(ptr);           // Allocate memory for an Integer
+  ptr^ := 42;         // Assign value 42 to the memory location
+  value := ptr^;      // Access the value through the pointer
+
+  Writeln('Value pointed to by ptr: ', value);
+
+  Dispose(ptr);       // Free the allocated memory
 end.
 ```
 
-### Static Arrays
+### Safe Usage Tips
 
-Static arrays have a fixed size defined at compile time.
+1. **Always Initialize Pointers**: Before using a pointer, make sure it points to valid memory. Uninitialized pointers can cause undefined behavior.
 
-**Syntax**
-
-```pascal linenums="1"
-var
-  arrayName: array[startIndex..endIndex] of elementType;
-```
-
-**Example**
+2. **Check for nil**: It’s good practice to check if a pointer is nil (i.e., not pointing to any memory) before using it:
 
 ```pascal linenums="1"
-program StaticArrayExample;
-
-var
-  numbers: array[1..5] of integer;
-  i: integer;
-
-  { Main Block }
-begin
-  // Initialising the array
-  numbers[1] := 10;
-  numbers[2] := 20;
-  numbers[3] := 30;
-  numbers[4] := 40;
-  numbers[5] := 50;
-
-  // Accessing and printing array elements
-  for i := 1 to 5 do
-    WriteLn('numbers[', i, '] = ', numbers[i]);
-end.
-
+if ptr <> nil then
+  Writeln(ptr^);
 ```
 
-### Dynamic Arrays
+3. **Avoid Memory Leaks**: Always pair `New` with `Dispose` to prevent memory leaks. If you forget to free the allocated memory, it will not be available for other parts of your program or system.
 
-Dynamic arrays can be resized at runtime using the `SetLength` procedure.
-
-**Syntax**
+4. **Don’t Use Freed Pointers**: After calling `Dispose`, the pointer still holds the address of the freed memory. Set it to `nil` to avoid accidental use:
 
 ```pascal linenums="1"
-var
-  arrayName: array of elementType;
+Dispose(ptr);
+ptr := nil;
 ```
 
-**Example**
+5. **Be Cautious with Pointer Arithmetic**: Although not commonly needed in high-level Pascal programming, pointer arithmetic (e.g., incrementing pointers) should be done carefully to avoid accessing invalid memory areas.
+ 
+More info? See [Pointers](https://www.freepascal.org/docs-html/ref/refse15.html#x42-620003.4) and [Memory Management](https://wiki.freepascal.org/Memory_Management).
 
-```pascal linenums="1"
-program DynamicArrayExample;
-
-var
-  numbers: array of integer;
-  i: integer;
-
-  { Main Block }
-begin
-  // Setting the length of the array
-  SetLength(numbers, 5);
-
-  // Initialising the array
-  for i := 0 to High(numbers) do
-    numbers[i] := (i + 1) * 10;
-
-  // Accessing and printing array elements
-  for i := 0 to High(numbers) do
-    WriteLn('numbers[', i, '] = ', numbers[i]);
-
-  // Resizing the array
-  SetLength(numbers, 10);
-  for i := 5 to 9 do
-    numbers[i] := (i + 1) * 10;
-
-  // Accessing and printing array elements after resizing
-  for i := 0 to High(numbers) do
-    WriteLn('numbers[', i, '] = ', numbers[i]);
-end.
-```
-
-### Concat Dynamic Arrays
-
-This operator is available in Delphi mode, but must be enabled explicily using the modeswitch arrayoperators in objfpc mode:
-
-```pascal linenums="1"
-{$mode objfpc}  
-{$modeswitch arrayoperators}
-```
-
-**Syntax**
-
-```pascal linenums="1"
-resultArray := array1 + array2;
-```
-
-
-**Example**
-
-```pascal linenums="1" hl_lines="4 33"
-program DynArrayConcat;
-
-  {$mode objfpc}{$H+}{$J-}
-  {$modeswitch arrayoperators}
-
-uses
-  SysUtils;
-
-type
-  TIntArray = array of integer;
-
-procedure PrintArray(arr: TIntArray);
-var
-  i: Integer;
-begin
-  for i := Low(arr) to High(arr) do
-    Write(arr[i], ' ');
-  WriteLn;
-end;
-
-var
-  arr1, arr2, resultArr: TIntArray;
-
-  { Main Block }
-begin
-  // Initialize the first array
-  arr1 := [1, 2, 3, 4, 5];
-
-  // Initialize the second array
-  arr2 := [6, 7, 8, 9, 10];
-
-  // Concatenate the arrays using the + operator
-  resultArr := arr1 + arr2;
-
-  // Print the arrays
-  WriteLn('Array 1:');
-  PrintArray(arr1);
-  WriteLn('Array 2:');
-  PrintArray(arr2);
-  WriteLn('Concatenated Array:');
-  PrintArray(resultArr);
-
-  // Pause console
-  ReadLn;
-end.
-```
-
-See more info on the [Dynamic Array Operators](https://www.freepascal.org/docs-html/ref/refsu48.html) document.
-
-### Open Arrays
-
-Open arrays are typically used in procedures or functions to accept arrays of varying sizes.
-
-**Syntax**
-
-```pascal linenums="1"
-procedure ProcedureName(arrayName: array of elementType);
-```
-
-
-**Example**
-
-```pascal linenums="1"
-program OpenArrayExample;
-
-procedure PrintArray(arr: array of integer);
-var
-  i: integer;
-begin
-  for i := Low(arr) to High(arr) do
-    WriteLn('arr[', i, '] = ', arr[i]);
-end;
-
-var
-  numbers: array[1..5] of integer;
-
-  { Main Block }
-begin
-  // Initialising the array
-  numbers[1] := 10;
-  numbers[2] := 20;
-  numbers[3] := 30;
-  numbers[4] := 40;
-  numbers[5] := 50;
-
-  // Passing the array to the procedure
-  PrintArray(numbers);
-end.
-```
-
-
-## Enum Types
-
-In Free Pascal, enumerated ordinal types are user-defined types that consist of a set of named values. These values are called enumeration constants, and each constant has an associated integer value, starting from 0 by default. 
-
-Enumerated types provide a way to define a variable that can only take one of a specified set of values, making the code more readable and type-safe.
-
-**Syntax**
-
-```pascal linenums="1"
-type
-  TEnumName = (Value1, Value2, Value3, ...);
-```
-
-**Example**
-
-```pascal linenums="1"
-  {$mode objfpc}{$H+}{$J-}
-
-type
-  TDay = (Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday);
-
-var
-  today: TDay;
-
-  { Main Block }
-begin
-  // Assign today var to TDay.Wednesday 
-  today := Wednesday;
-  
-  WriteLn('Integer(today)      gives ', Integer(today));     // Prints 3
-  WriteLn('Integer(Wednesday)) gives ', Integer(Wednesday)); // Prints 3
-  WriteLn('TDay(0)             gives ', TDay(0));            // Prints Sunday
-
-  if today = Wednesday then
-  begin
-    WriteLn('Today is Wednesday');
-  end;
-end.
-```
-
-**Example of an Enum in case statement**
-
-```pascal linenums="1"
-  {$mode objfpc}{$H+}{$J-}
-
-type
-  TColor = (Red, Green, Blue);
-
-var
-  color: TColor;
-
-  { Main Block }
-begin
-  color := Green;
-  case color of
-    Red: WriteLn('Red');
-    Green: WriteLn('Green');
-    Blue: WriteLn('Blue');
-  end;
-end.
-```
 
 ## Classes
 
