@@ -366,7 +366,7 @@ See [Format](https://www.freepascal.org/docs-html/rtl/sysutils/format.html) for 
 
 **Example**
 
-```pascal linenums="1"
+```pascal linenums="1" hl_lines="5 6 16"
 program FormatNumberCommas;
 
 {$mode objfpc}{$H+}{$J-}
@@ -402,7 +402,7 @@ See [`CurrToStrF`](https://www.freepascal.org/docs-html/3.2.2/rtl/sysutils/currt
 
 **Example**
 
-```pascal linenums="1"
+```pascal linenums="1" hl_lines="5 6 15"
 program FormatCurrency;
 
 {$mode objfpc}{$H+}{$J-}
