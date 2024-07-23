@@ -1108,6 +1108,44 @@ end.
 
 ## Arrays
 
+Arrays are useful when you need to handle multiple values of the same type. For example, if you have grades for students, you can use an array to store all these grades and easily access each one by its position.
+
+## Defining Arrays
+
+**1. Directly in the var section**
+
+```pascal linenums="1"
+var
+  numbers: array[1..5] of integer;
+```
+
+**2. Using the type section**
+
+
+```pascal linenums="1"
+type
+  TNumberArray = array[1..5] of Integer;
+
+var
+  numbers: TNumberArray;
+```
+
+### Working with Arrays
+
+**Example**
+
+```pascal linenums="1"
+var
+  numbers: array[1..5] of Integer;
+
+  { Main Block }
+begin
+  numbers[1] := 10;  // Set the first element to 10
+  numbers[2] := 20;  // Set the second element to 20
+  writeln(numbers[1]); // This will print 10
+end.
+```
+
 ### Static Arrays
 
 Static arrays have a fixed size defined at compile time.
