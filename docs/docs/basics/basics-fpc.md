@@ -251,7 +251,9 @@ begin
 end.
 ```
 
-## Round Floats to Nearest Integers
+## Round Floats 
+
+### To Nearest Integers
 
 You can use the following functions.
 
@@ -313,7 +315,7 @@ begin
 end.
 ```
 
-## Round Floats to `n` Decimal Places
+### To `n` Decimal Places
 
 Use the [RoundTo](https://www.freepascal.org/docs-html/rtl/math/roundto.html) function.
 
