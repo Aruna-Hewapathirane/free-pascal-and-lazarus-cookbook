@@ -74,7 +74,9 @@ begin
 end.
 ```
 
-## Variable Declaration
+## Variables
+
+### Declaration
 
 Declare variables within the `var` section of your program.
 
@@ -98,77 +100,7 @@ var
 Check out the official documentation [Types](https://www.freepascal.org/docs-html/ref/refch3.html#refse12.html) for a full list and explanation of the types you can use.
 
 
-## Console 
-
-### User Input
-
-In Free Pascal, `Read` and `ReadLn` are used for input, but they work a bit differently.
-
-Use `Read` when you want to read input without moving to the next line.
-
-```pascal linenums="1"
-{$mode objfpc}{$H+}{$J-}
-var
-  num1, num2: integer;
-begin
-  { Using Read -- The next value read will be num 2. }
-  Write('Enter two numbers: ');
-  Read(num1);
-  Read(num2);
-  WriteLn('You entered: ', num1, ' and ', num2);
-end.
-```
-
-Use `ReadLn` when you want to read input and move to the next line afterward.
-
-```pascal linenums="1"
-{$mode objfpc}{$H+}{$J-}
-var
-  num1, num2: integer;
-begin
-  { Using ReadLn -- The next value after a new line will be num 2. }
-  Write('Enter two numbers on separate lines: ');
-  ReadLn(num1);
-  ReadLn(num2);
-  WriteLn('You entered: ', num1, ' and ', num2);
-end.
-```
-
-### Display Text
-
-
-Similarly, `Write` and `WriteLn` are used to output text, but they behave differently.
-
-Use `Write` to output text without moving to the next line. It keeps the cursor on the same line, so subsequent output will continue from where the previous output ended.
-
-
-```pascal linenums="1"
-{$mode objfpc}{$H+}{$J-}
-
-begin
-  { Using Write -- World! appears after Hello. }
-  Write('Hello '); // No new line at the end of the string.
-  Write('World!'); // No new line at the end of the string.
-
-  // A spacer
-  WriteLn;
-end.
-```
-
-Use `WriteLn` to output text and then moves the cursor to the next line. It adds a newline character after the text, so any subsequent output starts on a new line.
-
-
-```pascal linenums="1"
-{$mode objfpc}{$H+}{$J-}
-
-begin
-  { Using WriteLn -- World! appears underneath Hello. }
-  WriteLn('Hello '); // There is a new line at the end of the string.
-  WriteLn('World!'); // There is a new line at the end of the string.
-end.
-```
-
-## Variable Assignment
+### Assignment
 
 !!! Important
     After declaring a variable, make sure to initialise it before use, else you might end up with a garbage value.
@@ -244,6 +176,76 @@ begin
   ReadLn;
 end.
 ```
+
+## Console 
+
+### User Input
+
+In Free Pascal, `Read` and `ReadLn` are used for input, but they work a bit differently.
+
+Use `Read` when you want to read input without moving to the next line.
+
+```pascal linenums="1"
+{$mode objfpc}{$H+}{$J-}
+var
+  num1, num2: integer;
+begin
+  { Using Read -- The next value read will be num 2. }
+  Write('Enter two numbers: ');
+  Read(num1);
+  Read(num2);
+  WriteLn('You entered: ', num1, ' and ', num2);
+end.
+```
+
+Use `ReadLn` when you want to read input and move to the next line afterward.
+
+```pascal linenums="1"
+{$mode objfpc}{$H+}{$J-}
+var
+  num1, num2: integer;
+begin
+  { Using ReadLn -- The next value after a new line will be num 2. }
+  Write('Enter two numbers on separate lines: ');
+  ReadLn(num1);
+  ReadLn(num2);
+  WriteLn('You entered: ', num1, ' and ', num2);
+end.
+```
+
+### Display Text
+
+Similarly, `Write` and `WriteLn` are used to output text, but they behave differently.
+
+Use `Write` to output text without moving to the next line. It keeps the cursor on the same line, so subsequent output will continue from where the previous output ended.
+
+```pascal linenums="1"
+{$mode objfpc}{$H+}{$J-}
+
+begin
+  { Using Write -- World! appears after Hello. }
+  Write('Hello '); // No new line at the end of the string.
+  Write('World!'); // No new line at the end of the string.
+
+  // A spacer
+  WriteLn;
+end.
+```
+
+Use `WriteLn` to output text and then moves the cursor to the next line. It adds a newline character after the text, so any subsequent output starts on a new line.
+
+
+```pascal linenums="1"
+{$mode objfpc}{$H+}{$J-}
+
+begin
+  { Using WriteLn -- World! appears underneath Hello. }
+  WriteLn('Hello '); // There is a new line at the end of the string.
+  WriteLn('World!'); // There is a new line at the end of the string.
+end.
+```
+
+
 
 ## Procedures and Functions
 
