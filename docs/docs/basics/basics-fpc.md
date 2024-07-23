@@ -927,6 +927,185 @@ begin
 end.
 ```
 
+## Advanced Records
+
+In Free Pascal, an advanced record is a type of record that can do more than just store data. It can also have methods (which are like functions or procedures) and properties (ways to get or set values) attached to it.
+
+You must include the following switch to use Advanced Records.
+
+```pascal linenums="1"
+{$modeswitch advancedrecords}
+```
+
+**Syntax**
+
+```pascal linenums="1"
+type
+  TMyRecord = record
+  private
+    // Private fields and methods
+    FField: Integer;
+    procedure SetField(Value: Integer);
+    function GetField: Integer;
+  public
+    // Public methods and properties
+    procedure ShowInfo;
+    property Field: Integer read GetField write SetField;
+  end;
+```
+
+**Example: A Simple TRectangle Record**
+
+Let’s create an advanced record to represent a rectangle. This record will store the width and height of the rectangle and include methods to calculate the area and display the rectangle's details.
+
+We’ll create a record called `TRectangle` that has fields for width and height. It will also include a method to calculate the area and another to display the details.
+
+```pascal linenums="1"
+type
+  TRectangle = record
+  private
+    FWidth, FHeight: Double;
+    procedure SetWidth(Value: Double);
+    procedure SetHeight(Value: Double);
+    function GetWidth: Double;
+    function GetHeight: Double;
+  public
+    constructor Create(AWidth, AHeight: Double);
+    function Area: Double;
+    procedure ShowDetails;
+    property Width: Double read GetWidth write SetWidth;
+    property Height: Double read GetHeight write SetHeight;
+  end;
+
+constructor TRectangle.Create(AWidth, AHeight: Double);
+begin
+  FWidth := AWidth;
+  FHeight := AHeight;
+end;
+
+procedure TRectangle.SetWidth(Value: Double);
+begin
+  FWidth := Value;
+end;
+
+procedure TRectangle.SetHeight(Value: Double);
+begin
+  FHeight := Value;
+end;
+
+function TRectangle.GetWidth: Double;
+begin
+  Result := FWidth;
+end;
+
+function TRectangle.GetHeight: Double;
+begin
+  Result := FHeight;
+end;
+
+function TRectangle.Area: Double;
+begin
+  Result := FWidth * FHeight;
+end;
+
+procedure TRectangle.ShowDetails;
+begin
+  WriteLn('Rectangle Width: ', FWidth:0:2);
+  WriteLn('Rectangle Height: ', FHeight:0:2);
+  WriteLn('Rectangle Area: ', Area:0:2);
+end;
+```
+
+We use the `TRectangle` like this:
+
+```pascal linenums="1"
+var
+  Rect: TRectangle;
+  
+  {Main Block}
+begin
+  // Create a rectangle with width 10 and height 5
+  Rect := TRectangle.Create(10, 5);
+  
+  // Show the details of the rectangle
+  Rect.ShowDetails;
+end.
+```
+
+**Full Example**
+
+```pascal linenums="1"
+program AdvancedRecordDemo;
+
+{$mode objfpc}{$H+}{$J-}
+
+type
+  TRectangle = record
+  private
+    FWidth, FHeight: Double;
+    procedure SetWidth(Value: Double);
+    procedure SetHeight(Value: Double);
+    function GetWidth: Double;
+    function GetHeight: Double;
+  public
+    constructor Create(AWidth, AHeight: Double);
+    function Area: Double;
+    procedure ShowDetails;
+    property Width: Double read GetWidth write SetWidth;
+    property Height: Double read GetHeight write SetHeight;
+  end;
+
+constructor TRectangle.Create(AWidth, AHeight: Double);
+begin
+  FWidth := AWidth;
+  FHeight := AHeight;
+end;
+
+procedure TRectangle.SetWidth(Value: Double);
+begin
+  FWidth := Value;
+end;
+
+procedure TRectangle.SetHeight(Value: Double);
+begin
+  FHeight := Value;
+end;
+
+function TRectangle.GetWidth: Double;
+begin
+  Result := FWidth;
+end;
+
+function TRectangle.GetHeight: Double;
+begin
+  Result := FHeight;
+end;
+
+function TRectangle.Area: Double;
+begin
+  Result := FWidth * FHeight;
+end;
+
+procedure TRectangle.ShowDetails;
+begin
+  WriteLn('Rectangle Width: ', FWidth:0:2);
+  WriteLn('Rectangle Height: ', FHeight:0:2);
+  WriteLn('Rectangle Area: ', Area:0:2);
+end;
+
+var
+  Rect: TRectangle;
+
+  { Main Block }
+begin
+  // Create a rectangle with width 10 and height 5
+  Rect := TRectangle.Create(10, 5);
+  
+  // Show the details of the rectangle
+  Rect.ShowDetails;
+end.
+```
+
 ## Arrays
 
 ### Static Arrays
