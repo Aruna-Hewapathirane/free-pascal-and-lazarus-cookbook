@@ -255,9 +255,9 @@ end.
 
 You can use the following functions.
 
-- `Round`: Rounds a floating-point number to the nearest integer uses banker's rounding.
-- `Ceil`: Rounds a floating-point number up to the nearest integer.
-- `Floor`: Rounds a floating-point number down to the nearest integer.
+- [`Round`](https://www.freepascal.org/docs-html/rtl/system/round.html): Rounds a floating-point number to the nearest integer uses banker's rounding.
+- [`Ceil`](https://www.freepascal.org/docs-html/rtl/math/ceil.html): Rounds a floating-point number up to the nearest integer.
+- [`Floor`](https://www.freepascal.org/docs-html/rtl/math/floor.html): Rounds a floating-point number down to the nearest integer.
 
 !!! Important
     Remember to add `Math` in the `uses` section `Ceil` and `Floor` functions.
