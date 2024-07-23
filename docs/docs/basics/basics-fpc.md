@@ -1110,7 +1110,7 @@ end.
 
 Arrays are useful when you need to handle multiple values of the same type. For example, if you have grades for students, you can use an array to store all these grades and easily access each one by its position.
 
-## Defining Arrays
+### Defining Arrays
 
 **1. Directly in the var section**
 
