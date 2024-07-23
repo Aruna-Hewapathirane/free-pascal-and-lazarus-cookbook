@@ -251,11 +251,136 @@ begin
 end.
 ```
 
+## Round Floats to Nearest Integers
 
-## Rounding Numbers
+You can use the following functions.
 
-...
+- `Round`: Rounds a floating-point number to the nearest integer uses banker's rounding.
+- `Ceil`: Rounds a floating-point number up to the nearest integer.
+- `Floor`: Rounds a floating-point number down to the nearest integer.
 
+!!! Important
+    Remember to add `Math` in the `uses` section `Ceil` and `Floor` functions.
+
+**Examples**
+
+```pascal linenums="1"
+program RoundingExamples;
+
+{$mode objfpc}{$H+}{$J-}
+
+uses
+  Math;  // Include the Math unit for Ceil and Floor
+
+var
+  num: Real;
+  rounded: Integer;
+
+  { Main Block }
+begin
+  num := 123.4567;
+
+  // Using Round
+  rounded := Round(num);  // Nearest integer, Banker's Rounding
+  WriteLn('Rounded value (Round): ', rounded);
+
+  // Using Ceil
+  rounded := Ceil(num);   // Always rounds up
+  WriteLn('Ceiling value (Ceil): ', rounded);
+
+  // Using Floor
+  rounded := Floor(num);  // Always rounds down
+  WriteLn('Floor value (Floor): ', rounded);
+
+  // Examples of Banker's Rounding
+  num := 2.5;
+  rounded := Round(num);  // Banker's Rounding
+  WriteLn('Rounded value for 2.5 (Banker''s Rounding): ', rounded);
+
+  num := 3.5;
+  rounded := Round(num);  // Banker's Rounding
+  WriteLn('Rounded value for 3.5 (Banker''s Rounding): ', rounded);
+
+  // Pause console
+  WriteLn('Press enter key to exit');
+  ReadLn;
+end.
+```
+
+## Round Floats to `n` Decimal Places
+
+### Standard Rounding
+
+Use the [RoundTo](https://www.freepascal.org/docs-html/rtl/math/roundto.html) function.
+
+**Example**
+
+```pascal linenums="1"
+program NDecimalRoundingExample;
+
+{$mode objfpc}{$H+}{$J-}
+
+uses
+  Math;
+
+var
+  num: real;
+  rounded: real;
+  n: integer;
+
+  { Main Block }
+begin
+  num := 12345.678875;
+  n := 4;  // Number of decimal places you want
+
+  rounded := RoundTo(num, -n);
+
+  WriteLn('Rounded Number: ', rounded: 0: 4);  // Format to 4 decimal places
+
+  // Pause console
+  WriteLn('Press enter key to exit');
+  ReadLn;
+end.
+```
+
+### Banker's Rounding
+
+Here is a way to achieve it.
+
+```pascal linenums="1"
+program NDecimalRoundingBanker;
+
+{$mode objfpc}{$H+}{$J-}
+
+uses
+  Math;
+
+var
+  originalValue: double;
+  roundedValue: double;
+  tempValue: double;
+
+{ Main Block }
+begin
+  originalValue := 12345.678850;
+
+  // First, multiply by 10000 to move the decimal point
+  tempValue := originalValue * 10000;
+
+  // Round to the nearest integer (banker's rounding happens here)
+  tempValue := Round(tempValue);
+
+  // Then divide by 10000 to move the decimal point back
+  roundedValue := tempValue / 10000;
+
+  WriteLn('Original value        : ', originalValue: 0: 6);
+  writeln('Bankers rounded value : ', roundedValue : 0: 4);
+
+  // Pause console
+  WriteLn('Press enter key to exit');
+  ReadLn;
+end.
+```
 
 ## Format Strings
 
