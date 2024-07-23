@@ -260,6 +260,12 @@ You can use the following functions.
 - [`Floor`](https://www.freepascal.org/docs-html/rtl/math/floor.html): Rounds a floating-point number down to the nearest integer.
 
 !!! Important
+
+    For `Round`, in the case of .5 (equidistant from two numbers), the algorithm uses "banker's rounding": .5 values are always rounded towards the even number.
+
+    Source: [https://www.freepascal.org/docs-html/rtl/system/round.html](https://www.freepascal.org/docs-html/rtl/system/round.html)
+
+!!! Important
     Remember to add `Math` in the `uses` section `Ceil` and `Floor` functions.
 
 **Examples**
@@ -310,6 +316,12 @@ end.
 ## Round Floats to `n` Decimal Places
 
 Use the [RoundTo](https://www.freepascal.org/docs-html/rtl/math/roundto.html) function.
+
+!!! Important
+
+    `RoundTo` uses the standard `Round` function for this. Hence, in the case of .5 (equidistant from two numbers), the algorithm uses "banker's rounding": .5 values are always rounded towards the even number.
+    
+    Source: [https://www.freepascal.org/docs-html/rtl/math/roundto.html](https://www.freepascal.org/docs-html/rtl/math/roundto.html)
 
 **Example**
 
