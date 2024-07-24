@@ -1920,7 +1920,115 @@ The GUID is like a special label that makes sure you’re talking to the exact r
 
 ## Processing Text File
 
-...
+### Read Text File
+
+Here's an example to read a file line by line using `TFileStream` and `TStreamReader`:
+
+**Example**
+
+```pascal linenums="1"
+program SimpleReadTextFile;
+
+{$mode objfpc}{$H+}{$J-}
+
+uses
+  SysUtils,
+  Classes,
+  streamex;
+
+var
+  fileStream: TFileStream;
+  streamReader: TStreamReader;
+  line: string;
+
+  { Main Block }
+begin
+  try
+    // Open the file
+    fileStream := TFileStream.Create('your-file.csv', fmOpenRead);
+    try
+      streamReader := TStreamReader.Create(fileStream, 65536, False);
+      try
+        // Read the file line by line
+        while not streamReader.Eof do
+        begin
+          line := streamReader.ReadLine;
+          // Process the line (for now, we just print it)
+          Writeln(line);
+        end;
+      finally
+        // Clean up
+        streamReader.Free;
+      end;
+    finally
+      // Clean up
+      fileStream.Free;
+    end;
+  except
+    on E: Exception do
+      Writeln('An error occurred: ', E.Message);
+  end;
+end.
+```
+
+- The `streamex` unit includes the `TStreamReader` class for handling text stream operations.
+- The `try...finally` blocks guarantee that both `streamReader` and `fileStream` are properly released, even if an error occurs during the file reading process.
+- Substitute `your-file.txt` with the name of your file.
+- The `try...except` block handles any exceptions that arise during file operations and outputs an appropriate error message.
+
+
+### Write Text File
+
+**Example**
+
+```pascal linenums="1"
+program SimpleWriteTextFile;
+
+{$mode objfpc}{$H+}{$J-}
+
+uses
+  Classes,
+  SysUtils;
+
+var
+  text: string;
+  filename: string;
+  fileStream: TFileStream;
+  size: longint;
+
+  { Main Block }
+begin
+  try
+    // String to be written
+    text := 'Hello Text!' + LineEnding + 'I''ll be written in a file!';
+
+    // Text file to write the text to
+    filename := 'hello-text.txt';
+
+    // Create a TFileStream
+    fileStream := TFileStream.Create(filename, fmCreate);
+    try
+      // Set writing position at the beginning of file
+      fileStream.Position := 0;
+      // Write text into the file and return written bytes
+      size := fileStream.Write(Text[1], Length(Text));
+      // Optional - Show confirmation
+      Writeln(Format('Created %s. %d bytes written.', [filename, size]));
+    finally
+      // Free TFileStream object
+      fileStream.Free;
+    end;
+  except
+    on E: Exception do
+      Writeln('An error occurred: ', E.Message);
+  end;
+end.
+```
+
+- The `try...finally` block ensures that the fileStream is properly closed and released even if an exception occurs during the file writing process.
+- Update the content of the Text variable with the string you want to write to the file.
+- Change `hello-text.txt` to the name of the file you wish to create or modify.
+- The `try...except` block captures any exceptions that might occur during file operations and displays an appropriate error message.
 
 ## Pointers
 
