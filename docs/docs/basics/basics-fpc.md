@@ -251,188 +251,6 @@ begin
 end.
 ```
 
-
-## Format Strings
-
-### Format Numbers with Commas
-
-1. **Include the `SysUtils` unit**, as the `Format` function is part of this unit.
-2. Use the `Format` function with appropriate format specifiers.
-
-See [Format](https://www.freepascal.org/docs-html/rtl/sysutils/format.html) for more info.
-
-**Example**
-
-```pascal linenums="1" hl_lines="5 6 16"
-program FormatNumberCommas;
-
-{$mode objfpc}{$H+}{$J-}
-
-uses
-  SysUtils;
-
-var
-  number: int64;
-  formattedNumber: string;
-
-  { Main Block }
-begin
-  // Formatting a number with commas
-  number := 12345678;
-  formattedNumber := Format('%.0n', [number * 1.0]);
-  WriteLn('Formatted Number: ', formattedNumber);  // Output: 12,345,678
-
-  // Pause console
-  WriteLn('Press enter key to exit');
-  ReadLn;
-end.
-```
-
-- `'%.0n'` format specifier means *"format as a number with no decimal places, using the locale's thousands separator"*.
-
-### Format Numbers as Currency
-
-1. **Include the `SysUtils` unit**, as the `CurrToStrF` function is part of this unit.
-2. Use the `CurrToStrF` function with appropriate format specifiers and decimal place.
-
-See [`CurrToStrF`](https://www.freepascal.org/docs-html/3.2.2/rtl/sysutils/currtostrf.html) for more info.
-
-**Example**
-
-```pascal linenums="1" hl_lines="5 6 15"
-program FormatCurrency;
-
-{$mode objfpc}{$H+}{$J-}
-
-uses
-  SysUtils;
-
-var
-  amount: currency;
-  formattedAmount: string;
-
-  { Main Block }
-begin
-  amount := 12345678.90;
-  formattedAmount := CurrToStrF(amount, ffCurrency, 2);
-  WriteLn(formattedAmount);  // Output: $12,345,678.90
-
-  // Pause console
-  WriteLn('Press enter to quit');
-  ReadLn;
-end.
-```
-
-- [`CurrToStrF`](https://www.freepascal.org/docs-html/3.2.2/rtl/sysutils/currtostrf.html) function: This formats a number as currency. The parameters are:
-    - The number to format.
-    - `ffCurrency`: A format specifier indicating that we want currency formatting.
-    - `2`: The number of decimal places.
-
-
-## Round Floats 
-
-### To Nearest Integers
-
-You can use the following functions.
-
-- [`Round`](https://www.freepascal.org/docs-html/rtl/system/round.html): Rounds a floating-point number to the nearest integer uses banker's rounding.
-- [`Ceil`](https://www.freepascal.org/docs-html/rtl/math/ceil.html): Rounds a floating-point number up to the nearest integer.
-- [`Floor`](https://www.freepascal.org/docs-html/rtl/math/floor.html): Rounds a floating-point number down to the nearest integer.
-
-!!! Important
-
-    For `Round`, in the case of .5 (equidistant from two numbers), the algorithm uses "banker's rounding": .5 values are always rounded towards the even number.
-
-    Source: [https://www.freepascal.org/docs-html/rtl/system/round.html](https://www.freepascal.org/docs-html/rtl/system/round.html)
-
-!!! Important
-    Remember to add `Math` in the `uses` section `Ceil` and `Floor` functions.
-
-**Examples**
-
-```pascal linenums="1"
-program RoundingExamples;
-
-{$mode objfpc}{$H+}{$J-}
-
-uses
-  Math;  // Include the Math unit for Ceil and Floor
-
-var
-  num: Real;
-  rounded: Integer;
-
-  { Main Block }
-begin
-  num := 123.4567;
-
-  // Using Round
-  rounded := Round(num);  // Nearest integer, Banker's Rounding
-  WriteLn('Rounded value (Round): ', rounded);
-
-  // Using Ceil
-  rounded := Ceil(num);   // Always rounds up
-  WriteLn('Ceiling value (Ceil): ', rounded);
-
-  // Using Floor
-  rounded := Floor(num);  // Always rounds down
-  WriteLn('Floor value (Floor): ', rounded);
-
-  // Examples of Banker's Rounding
-  num := 2.5;
-  rounded := Round(num);  // Banker's Rounding
-  WriteLn('Rounded value for 2.5 (Banker''s Rounding): ', rounded);
-
-  num := 3.5;
-  rounded := Round(num);  // Banker's Rounding
-  WriteLn('Rounded value for 3.5 (Banker''s Rounding): ', rounded);
-
-  // Pause console
-  WriteLn('Press enter key to exit');
-  ReadLn;
-end.
-```
-
-### To `n` Decimal Places
-
-Use the [RoundTo](https://www.freepascal.org/docs-html/rtl/math/roundto.html) function.
-
-!!! Important
-
-    `RoundTo` uses the standard `Round` function for this. Hence, in the case of .5 (equidistant from two numbers), the algorithm uses "banker's rounding": .5 values are always rounded towards the even number.
-    
-    Source: [https://www.freepascal.org/docs-html/rtl/math/roundto.html](https://www.freepascal.org/docs-html/rtl/math/roundto.html)
-
-**Example**
-
-```pascal linenums="1"
-program NDecimalRoundingExample;
-
-{$mode objfpc}{$H+}{$J-}
-
-uses
-  Math;
-
-var
-  num: real;
-  rounded: real;
-  n: integer;
-
-  { Main Block }
-begin
-  num := 12345.678875;
-  n := 4;  // Number of decimal places you want
-
-  rounded := RoundTo(num, -n);
-
-  WriteLn('Rounded Number: ', rounded: 0: 4);  // Format to 4 decimal places
-
-  // Pause console
-  WriteLn('Press enter key to exit');
-  ReadLn;
-end.
-```
-
 ## Procedures and Functions
 
 ### Procedure
@@ -1006,7 +824,187 @@ begin
   index := Pos(substr, str);
   WriteLn('Position of "', substr, '" in "', str, '" is: ', index); // Output: 8
 end.
+```
 
+## Format Strings
+
+### Format Numbers with Commas
+
+1. **Include the `SysUtils` unit**, as the `Format` function is part of this unit.
+2. Use the `Format` function with appropriate format specifiers.
+
+See [Format](https://www.freepascal.org/docs-html/rtl/sysutils/format.html) for more info.
+
+**Example**
+
+```pascal linenums="1" hl_lines="5 6 16"
+program FormatNumberCommas;
+
+{$mode objfpc}{$H+}{$J-}
+
+uses
+  SysUtils;
+
+var
+  number: int64;
+  formattedNumber: string;
+
+  { Main Block }
+begin
+  // Formatting a number with commas
+  number := 12345678;
+  formattedNumber := Format('%.0n', [number * 1.0]);
+  WriteLn('Formatted Number: ', formattedNumber);  // Output: 12,345,678
+
+  // Pause console
+  WriteLn('Press enter key to exit');
+  ReadLn;
+end.
+```
+
+- `'%.0n'` format specifier means *"format as a number with no decimal places, using the locale's thousands separator"*.
+
+### Format Numbers as Currency
+
+1. **Include the `SysUtils` unit**, as the `CurrToStrF` function is part of this unit.
+2. Use the `CurrToStrF` function with appropriate format specifiers and decimal place.
+
+See [`CurrToStrF`](https://www.freepascal.org/docs-html/3.2.2/rtl/sysutils/currtostrf.html) for more info.
+
+**Example**
+
+```pascal linenums="1" hl_lines="5 6 15"
+program FormatCurrency;
+
+{$mode objfpc}{$H+}{$J-}
+
+uses
+  SysUtils;
+
+var
+  amount: currency;
+  formattedAmount: string;
+
+  { Main Block }
+begin
+  amount := 12345678.90;
+  formattedAmount := CurrToStrF(amount, ffCurrency, 2);
+  WriteLn(formattedAmount);  // Output: $12,345,678.90
+
+  // Pause console
+  WriteLn('Press enter to quit');
+  ReadLn;
+end.
+```
+
+- [`CurrToStrF`](https://www.freepascal.org/docs-html/3.2.2/rtl/sysutils/currtostrf.html) function: This formats a number as currency. The parameters are:
+    - The number to format.
+    - `ffCurrency`: A format specifier indicating that we want currency formatting.
+    - `2`: The number of decimal places.
+
+
+## Round Floats 
+
+### To Nearest Integers
+
+You can use the following functions.
+
+- [`Round`](https://www.freepascal.org/docs-html/rtl/system/round.html): Rounds a floating-point number to the nearest integer uses banker's rounding.
+- [`Ceil`](https://www.freepascal.org/docs-html/rtl/math/ceil.html): Rounds a floating-point number up to the nearest integer.
+- [`Floor`](https://www.freepascal.org/docs-html/rtl/math/floor.html): Rounds a floating-point number down to the nearest integer.
+
+!!! Important
+
+    For `Round`, in the case of .5 (equidistant from two numbers), the algorithm uses "banker's rounding": .5 values are always rounded towards the even number.
+
+    Source: [https://www.freepascal.org/docs-html/rtl/system/round.html](https://www.freepascal.org/docs-html/rtl/system/round.html)
+
+!!! Important
+    Remember to add `Math` in the `uses` section `Ceil` and `Floor` functions.
+
+**Examples**
+
+```pascal linenums="1"
+program RoundingExamples;
+
+{$mode objfpc}{$H+}{$J-}
+
+uses
+  Math;  // Include the Math unit for Ceil and Floor
+
+var
+  num: Real;
+  rounded: Integer;
+
+  { Main Block }
+begin
+  num := 123.4567;
+
+  // Using Round
+  rounded := Round(num);  // Nearest integer, Banker's Rounding
+  WriteLn('Rounded value (Round): ', rounded);
+
+  // Using Ceil
+  rounded := Ceil(num);   // Always rounds up
+  WriteLn('Ceiling value (Ceil): ', rounded);
+
+  // Using Floor
+  rounded := Floor(num);  // Always rounds down
+  WriteLn('Floor value (Floor): ', rounded);
+
+  // Examples of Banker's Rounding
+  num := 2.5;
+  rounded := Round(num);  // Banker's Rounding
+  WriteLn('Rounded value for 2.5 (Banker''s Rounding): ', rounded);
+
+  num := 3.5;
+  rounded := Round(num);  // Banker's Rounding
+  WriteLn('Rounded value for 3.5 (Banker''s Rounding): ', rounded);
+
+  // Pause console
+  WriteLn('Press enter key to exit');
+  ReadLn;
+end.
+```
+
+### To `n` Decimal Places
+
+Use the [RoundTo](https://www.freepascal.org/docs-html/rtl/math/roundto.html) function.
+
+!!! Important
+
+    `RoundTo` uses the standard `Round` function for this. Hence, in the case of .5 (equidistant from two numbers), the algorithm uses "banker's rounding": .5 values are always rounded towards the even number.
+    
+    Source: [https://www.freepascal.org/docs-html/rtl/math/roundto.html](https://www.freepascal.org/docs-html/rtl/math/roundto.html)
+
+**Example**
+
+```pascal linenums="1"
+program NDecimalRoundingExample;
+
+{$mode objfpc}{$H+}{$J-}
+
+uses
+  Math;
+
+var
+  num: real;
+  rounded: real;
+  n: integer;
+
+  { Main Block }
+begin
+  num := 12345.678875;
+  n := 4;  // Number of decimal places you want
+
+  rounded := RoundTo(num, -n);
+
+  WriteLn('Rounded Number: ', rounded: 0: 4);  // Format to 4 decimal places
+
+  // Pause console
+  WriteLn('Press enter key to exit');
+  ReadLn;
+end.
 ```
 
 ## Enum Types
@@ -1585,58 +1583,6 @@ begin
 end.
 ```
 
-
-## Pointers
-
-> ... Avoid pointer whenever alternatives exist. If you want to learn, though, there's no silver bullet apart from: There has to be as many `Dispose` as `New`, period. 
-> 
-> Source: [Leledumbo's reply on 'Dispose of Pointer', 2023-08-10](https://forum.lazarus.freepascal.org/index.php/topic,64238.msg487999.html#msg487999).
- 
-**Example**
-
-```pascal linenums="1"
-program PointerExample;
-
-var
-  ptr: ^integer;  // Declare a pointer to Integer
-  value: integer;
-
-begin
-  New(ptr);           // Allocate memory for an Integer
-  ptr^ := 42;         // Assign value 42 to the memory location
-  value := ptr^;      // Access the value through the pointer
-
-  Writeln('Value pointed to by ptr: ', value);
-
-  Dispose(ptr);       // Free the allocated memory
-end.
-```
-
-### Safe Usage Tips
-
-1. **Always Initialize Pointers**: Before using a pointer, make sure it points to valid memory. Uninitialized pointers can cause undefined behavior.
-
-2. **Check for nil**: It’s good practice to check if a pointer is nil (i.e., not pointing to any memory) before using it:
-
-```pascal linenums="1"
-if ptr <> nil then
-  Writeln(ptr^);
-```
-
-3. **Avoid Memory Leaks**: Always pair `New` with `Dispose` to prevent memory leaks. If you forget to free the allocated memory, it will not be available for other parts of your program or system.
-
-4. **Don’t Use Freed Pointers**: After calling `Dispose`, the pointer still holds the address of the freed memory. Set it to `nil` to avoid accidental use:
-
-```pascal linenums="1"
-Dispose(ptr);
-ptr := nil;
-```
-
-5. **Be Cautious with Pointer Arithmetic**: Although not commonly needed in high-level Pascal programming, pointer arithmetic (e.g., incrementing pointers) should be done carefully to avoid accessing invalid memory areas.
- 
-More info? See [Pointers](https://www.freepascal.org/docs-html/ref/refse15.html#x42-620003.4) and [Memory Management](https://wiki.freepascal.org/Memory_Management).
-
-
 ## Classes
 
 Here is a simple example of creating a class. For mroe info, visit the official documentation; [Classes](https://www.freepascal.org/docs-html/ref/refch6.html#x69-930006). 
@@ -1976,6 +1922,52 @@ The GUID is like a special label that makes sure you’re talking to the exact r
 
 ...
 
+## Pointers
 
+> ... Avoid pointer whenever alternatives exist. If you want to learn, though, there's no silver bullet apart from: There has to be as many `Dispose` as `New`, period. 
+> 
+> Source: [Leledumbo's reply on 'Dispose of Pointer', 2023-08-10](https://forum.lazarus.freepascal.org/index.php/topic,64238.msg487999.html#msg487999).
+ 
+**Example**
 
+```pascal linenums="1"
+program PointerExample;
 
+var
+  ptr: ^integer;  // Declare a pointer to Integer
+  value: integer;
+
+begin
+  New(ptr);           // Allocate memory for an Integer
+  ptr^ := 42;         // Assign value 42 to the memory location
+  value := ptr^;      // Access the value through the pointer
+
+  Writeln('Value pointed to by ptr: ', value);
+
+  Dispose(ptr);       // Free the allocated memory
+end.
+```
+
+### Safe Usage Tips
+
+1. **Always Initialize Pointers**: Before using a pointer, make sure it points to valid memory. Uninitialized pointers can cause undefined behavior.
+
+2. **Check for nil**: It’s good practice to check if a pointer is nil (i.e., not pointing to any memory) before using it:
+
+```pascal linenums="1"
+if ptr <> nil then
+  Writeln(ptr^);
+```
+
+3. **Avoid Memory Leaks**: Always pair `New` with `Dispose` to prevent memory leaks. If you forget to free the allocated memory, it will not be available for other parts of your program or system.
+
+4. **Don’t Use Freed Pointers**: After calling `Dispose`, the pointer still holds the address of the freed memory. Set it to `nil` to avoid accidental use:
+
+```pascal linenums="1"
+Dispose(ptr);
+ptr := nil;
+```
+
+5. **Be Cautious with Pointer Arithmetic**: Although not commonly needed in high-level Pascal programming, pointer arithmetic (e.g., incrementing pointers) should be done carefully to avoid accessing invalid memory areas.
+ 
+More info? See [Pointers](https://www.freepascal.org/docs-html/ref/refse15.html#x42-620003.4) and [Memory Management](https://wiki.freepascal.org/Memory_Management).
