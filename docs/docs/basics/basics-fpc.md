@@ -1918,9 +1918,9 @@ In this example, `IDriveable` has a unique `GUID`, so even if you have many diff
 The GUID is like a special label that makes sure you’re talking to the exact right set of instructions (interface) among many possibilities.
 
 
-## Processing Text File
+## Processing Text Files
 
-### Read Text File
+### Read a Text File
 
 Here's an example to read a file line by line using `TFileStream` and `TStreamReader`:
 
@@ -1977,7 +1977,7 @@ end.
 - The `try...except` block handles any exceptions that arise during file operations and outputs an appropriate error message.
 
 
-### Write Text File
+### Write a Text File
 
 **Example**
 
