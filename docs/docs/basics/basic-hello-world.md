@@ -1,5 +1,10 @@
 # Hello World! 
 
+How would you like to do your `Hello World`?
+
+- [I'm using the Lazarus IDE](#using-the-lazarus-ide)
+- [I'm using the CLI](#using-the-cli)
+
 ## Using the Lazarus IDE
 
 !!! Note
