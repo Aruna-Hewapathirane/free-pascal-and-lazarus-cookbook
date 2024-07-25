@@ -6,11 +6,37 @@ This page is my go-to guide to the key basics of Object Pascal with the [Free Pa
 
 Hope you find it super helpful! 🚀
 
+!!! Note
+
+    This section assumes you have correctly set up the Free Pascal Compiler and the Lazarus IDE for your OS.
+
+## Hello World! 
+
+Here is a simple program that prints `Hello World!` in Free Pascal.
+
+```pascal linenums="1"
+begin
+  WriteLn('Hello World!');
+end.
+```
+
+!!! tip "Tip: Running from the Lazarus IDE"
+    When running a console program in the Lazarus IDE, the console window may close too quickly to see the output. 
+    
+    Use `ReadLn` to keep it open until you press the ++enter++ key.
+
+    ```pascal linenums="1"
+    begin
+      WriteLn('Hello World!');
+      ReadLn; // Waits for the user to press Enter
+    end.
+    ```
+
 ## Reserved Words
 
 Reserved words are special words in the Pascal language that you cannot change or redefine.
 
-!!! Important
+!!! Note
 
     The Free Pascal Compiler lets you use uppercase or lowercase letters for these special words; they will work the same way.
 
@@ -90,7 +116,7 @@ Declare variables within the `var` section of your program.
 
 ```pascal linenums="1"
 var
-  variable_name:variable_type; 
+  variableName:dataType; 
 ```
 
 **Example**
@@ -108,10 +134,10 @@ Check out the official documentation [Types](https://www.freepascal.org/docs-htm
 
 ### Assignment
 
-!!! Important
+!!! Tip
     After declaring a variable, make sure to initialise it before use, else you might end up with a garbage value.
 
-!!! Important
+!!! Note
     `:=` -- Assignment.
 
     `=`  -- Comparison, equality.
@@ -121,7 +147,7 @@ Use `:=` for assigning a variable to a value.
 **Syntax**
 
 ```pascal
-a_variable := a_value
+variableName := value
 ```
 
 **Example**
@@ -260,7 +286,7 @@ A `procedure` is a block of code that performs a specific task but does not retu
 **Syntax**
 
 ```pascal linenums="1"
-procedure name_of_procedure;
+procedure ProcedureName;
 begin
   { your code goes here }
 end;
@@ -695,7 +721,7 @@ end.
 **Syntax**
 
 ```pascal linenums="1"
-a_string_var[index];
+stringVar[index];
 ```
 
 **Example**
@@ -913,13 +939,13 @@ You can use the following functions.
 - [`Ceil`](https://www.freepascal.org/docs-html/rtl/math/ceil.html): Rounds a floating-point number up to the nearest integer.
 - [`Floor`](https://www.freepascal.org/docs-html/rtl/math/floor.html): Rounds a floating-point number down to the nearest integer.
 
-!!! Important
+!!! Note
 
     For `Round`, in the case of .5 (equidistant from two numbers), the algorithm uses "banker's rounding": .5 values are always rounded towards the even number.
 
     Source: [https://www.freepascal.org/docs-html/rtl/system/round.html](https://www.freepascal.org/docs-html/rtl/system/round.html)
 
-!!! Important
+!!! Note
     Remember to add `Math` in the `uses` section `Ceil` and `Floor` functions.
 
 **Examples**
@@ -971,7 +997,7 @@ end.
 
 Use the [RoundTo](https://www.freepascal.org/docs-html/rtl/math/roundto.html) function.
 
-!!! Important
+!!! Note
 
     `RoundTo` uses the standard `Round` function for this. Hence, in the case of .5 (equidistant from two numbers), the algorithm uses "banker's rounding": .5 values are always rounded towards the even number.
     
