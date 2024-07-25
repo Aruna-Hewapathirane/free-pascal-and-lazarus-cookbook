@@ -76,7 +76,7 @@ You should be able to see a console open with `Hello World` in it.
 Press the ++enter++ key to exit the progam, which also closes the console.
 
 
-## Using your CLI
+## Using the CLI
 
 !!! Note
     This section assumes you have correctly set up the Free Pascal Compiler and the `fpc` is in your `PATH`. 
@@ -96,7 +96,7 @@ end.
 
 3. Save it as `HelloWorld.pas`.
 
-### Compile Using  `fpc` and Run
+### Compile and Run
 
 #### Windows CLI
 
