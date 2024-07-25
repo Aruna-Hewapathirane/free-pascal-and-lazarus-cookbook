@@ -1,4 +1,4 @@
-# Install FPC and Lazarus
+# Installation of FPC and Lazarus IDE
 
 ## Install on Windows
 

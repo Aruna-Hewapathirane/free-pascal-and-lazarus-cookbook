@@ -7,7 +7,7 @@ nav:
     - License: LICENSE.md
   - Basics:
     - Overview: docs/basics/overview.md
-    - Install FPC and Lazarus: docs/basics/install.md
+    - Installation: docs/basics/install.md
     - Hello World!: docs/basics/basic-hello-world.md
     - Intro to Free Pascal: docs/basics/basics-fpc.md
   - Core Tasks:
