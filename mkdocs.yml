@@ -14,7 +14,6 @@ nav:
     - Install FPC and Lazarus: docs/core-tasks/install.md
     - Lazarus IDE: docs/core-tasks/lazarus-ide.md
     - Code Structure: docs/core-tasks/code-structure.md
-    - Run a "Hello World!": docs/core-tasks/hello-world.md
     - Command Line Parameters: docs/core-tasks/cmd-line-params.md
     - Functions & Procedures: docs/core-tasks/funcs-procs.md
     - Immutability: docs/core-tasks/immutability.md
