@@ -78,7 +78,7 @@ Use `{` and `}` or `//` for making comments in Object Pascal.
 You might use conmments as follows.
 
 ```pascal linenums="1"
-{  This is a single line comment.}  
+{  This is a single line comment. }  
 
 // This is a single line comment. All is ignored till the end of the line.
 
@@ -106,7 +106,7 @@ begin
 end.
 ```
 
-## Variables
+## Variable and Basic Types
 
 ### Declaration
 
@@ -121,12 +121,15 @@ var
 
 **Example**
 
-To declare a string and an integer, you might declare them like this.
+Here's a simple example of declaring basic variable types in Free Pascal.
 
 ```pascal linenums="1"
 var
-  firstName:string;
-  age:integer;
+  myChar: char;       // A single character, like 'A' or 'b'
+  myString: string;   // A sequence of characters, like "Hello, world!"
+  myInt: integer;     // A whole number, like 42 or -7
+  myBool: boolean;    // A true or false value
+  myReal: real;       // A number with decimals, like 3.14 or -0.5
 ```
 
 Check out the official documentation [Types](https://www.freepascal.org/docs-html/ref/refch3.html#refse12.html) for a full list and explanation of the types you can use.
@@ -138,9 +141,9 @@ Check out the official documentation [Types](https://www.freepascal.org/docs-htm
     After declaring a variable, make sure to initialise it before use, else you might end up with a garbage value.
 
 !!! Note
-    `:=` -- Assignment.
+    `:=` is assignment.
 
-    `=`  -- Comparison, equality.
+    `=`  is comparison, equality.
 
 Use `:=` for assigning a variable to a value.
 
@@ -152,59 +155,35 @@ variableName := value
 
 **Example**
 
-```pascal linenums="1" hl_lines="13 16 19 22"
-program VariableAssignment;
+```pascal linenums="1" hl_lines="14-18"
+program BasicVariableTypes;
 
   {$mode objfpc}{$H+}{$J-}
 
 var
-  studentName: string;
-  studentAge: byte; // The range is 0..255, enough for storing a person's age.
-  studentID: string;
-  studentGroup: char;
+  myChar: char;       // A single character, like 'A' or 'b'
+  myString: string;   // A sequence of characters, like "Hello, world!"
+  myInt: integer;     // A whole number, like 42 or -7
+  myBool: boolean;    // A true or false value
+  myReal: real;       // A number with decimals, like 3.14 or -0.5
 
 begin
-  { Assign a string to studentName variable}
-  studentName := 'Jean Valjean';
+  // Assign values to the variables
+  myChar := 'A';
+  myString := 'Hello World!';
+  myInt := 42;
+  myBool := True;
+  myReal := 1234.5678;
 
-  { Assign a number to studentAge variable}
-  studentAge := 24;
+  // Print the values of the variables to the console
+  Writeln('Character: ', myChar);
+  Writeln('String: ', myString);
+  Writeln('Integer: ', myInt);
+  Writeln('Boolean: ', myBool);
+  Writeln('Real: ', myReal:0:4);
 
-  { Assign a string to studentID variable}
-  studentID := 'j-24601';
-
-  { Assign a char to studentGroup variable}
-  studentGroup := 'A';
-
-  { Display values to console }
-  WriteLn('Student Name : ', studentName);
-  WriteLn('Student Age  : ', studentAge);
-  WriteLn('Student ID   : ', studentID);
-  WriteLn('Student Group: ', studentGroup);
-
-  { Pause console }
-  ReadLn;
-end.
-```
-
-Alternatively, you can use `Read` or `ReadLn` to assign values to variables.
-
-**Example**
-
-```pascal linenums="1" hl_lines="10"
-program ReadExample2;
-
-  {$mode objfpc}{$H+}{$J-}
-
-var
-  num1, num2: integer;
-begin
-  WriteLn('Enter two numbers separated by a space: ');
-  { Assign first number to num1 and second one to num2. }
-  ReadLn(num1, num2);
-  WriteLn('You entered: ', num1, ' and ', num2);
-
-  // Pause console
+  // Pause Console
+  WriteLn('Press enter to quit');
   ReadLn;
 end.
 ```
@@ -498,7 +477,9 @@ begin
 end.
 ```
 
-## Choices - The `case` Statement
+## Choices and Decisions 
+
+### The `case` Statement
 
 **Syntax**
 
@@ -565,7 +546,7 @@ begin
 end.
 ```
 
-## Decisions - The `if` Statement
+### The `if` Statement
 
 **Syntax**
 
@@ -1375,7 +1356,7 @@ end.
 ```
 
 
-## Records
+## Records Types
 
 Just for the `Record`, a `record` is a data structure that allows you to group different types of data together. This feature in Free Pascal allow you to create complex data structures and manage related data efficiently.
 
